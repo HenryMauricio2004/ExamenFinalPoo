@@ -19,8 +19,6 @@ public class DatabaseController {
 
         TreeMap<Integer, ArrayList<String>> resultadosBusqueda = new TreeMap<Integer, ArrayList<String>>(); //00183223 TreeMap donde se almacenaran los resultados de busqueda (key -> id_compra)
 
-        ResultSet rs = null;
-
         ResultSet resultados = null; //00183223 ResultSet que se retornará (fuera del try para asegurar que siempre exista)
         try{ //00183223 intentar procedimiento SQL
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/RegistrosBCN", user, password); //00183223 obtener conexion con DB
@@ -39,22 +37,22 @@ public class DatabaseController {
 
             resultados = statement.executeQuery(); //00183223 ejecutar busqueda
 
-            while (resultados.next()){
-                ArrayList<String> detalles = new ArrayList<>();
+            while (resultados.next()){ //00183223 evaluar cada instancia de los resultados
+                ArrayList<String> detalles = new ArrayList<>(); //00183223 declarar array para contener los elementos de los resultados
 
-                detalles.add(resultados.getString("nombre"));
-                detalles.add(resultados.getString("apellido"));
-                detalles.add(resultados.getFloat("monto") + "");
-                detalles.add(resultados.getDate("fecha").toString());
+                detalles.add(resultados.getString("nombre")); //00183223 agregar el nombre del cliente al array
+                detalles.add(resultados.getString("apellido")); //00183223 agregar el apellido del cliente al array
+                detalles.add(resultados.getFloat("monto") + ""); //00183223 agregar el dinero gastado en la compra al array
+                detalles.add(resultados.getDate("fecha").toString()); //00183223 transformar la fecha a String y agregarlo al array
 
-                resultadosBusqueda.put(resultados.getInt("id"), detalles);
+                resultadosBusqueda.put(resultados.getInt("id"), detalles); //00183223 agregar al diccionario el array de detalles y usar el id de la compra como key
             }
 
             connection.close(); //00183223 cerrar conexion
-        } catch (SQLException e){
-            System.out.println(e);
+        } catch (SQLException e){ //00183223 atrapar error en SQL
+            System.out.println(e); //00183223 informar error en consola
         } finally {
-            return resultadosBusqueda;
+            return resultadosBusqueda; //00183223 retornar el treeMap generado
         }
 
 
