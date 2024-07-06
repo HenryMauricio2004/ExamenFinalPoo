@@ -18,8 +18,7 @@ public class DatabaseController {
     public TreeMap<Integer, ArrayList<String>> getComprasPorCliente(int id_cliente, Date fechaInicio, Date fechaFinal){ //00183223 funcion para obtener los registros de compra de un cliente en un lapso de tiempo en la DB
 
         TreeMap<Integer, ArrayList<String>> resultadosBusqueda = new TreeMap<Integer, ArrayList<String>>(); //00183223 TreeMap donde se almacenaran los resultados de busqueda (key -> id_compra)
-
-        ResultSet resultados = null; //00183223 ResultSet que se retornará (fuera del try para asegurar que siempre exista)
+        
         try{ //00183223 intentar procedimiento SQL
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/RegistrosBCN", user, password); //00183223 obtener conexion con DB
             PreparedStatement statement = connection.prepareStatement( //00183223 preparar instruccion SQL
@@ -28,14 +27,13 @@ public class DatabaseController {
                             "FROM compra INNER JOIN tarjeta ON compra.id_tarjeta = tarjeta.id_tarjeta " + //00183223 intersectar tablas de compra y tarjeta para acceder al id del cliente en la tabla tarjeta
                             "INNER JOIN cliente ON tarjeta.id_cliente = cliente.id_cliente WHERE cliente.id_cliente = ? " + //00183223 ahora con la intersección con la tabla cliente, y filtrar a solo las que comparten mismo id de cliente
                             "AND compra.fecha between ? and ? ;" //00183223 unicamente las compras de la tarjeta que se hayan hecho entre las 2 fechas especificadas
-
             );
 
             statement.setInt(1, id_cliente); //00183223 reemplazar primer ? por el id de cliente dado por el usuario
             statement.setDate(2, fechaInicio); //00183223 reemplazar segundo ? por la fecha de inicio de lapso
             statement.setDate(3, fechaFinal);//00183223 reemplazar tercer ? por la fecha de final de lapso
 
-            resultados = statement.executeQuery(); //00183223 ejecutar busqueda
+            ResultSet resultados = statement.executeQuery(); //00183223 ejecutar busqueda
 
             while (resultados.next()){ //00183223 evaluar cada instancia de los resultados
                 ArrayList<String> detalles = new ArrayList<>(); //00183223 declarar array para contener los elementos de los resultados
