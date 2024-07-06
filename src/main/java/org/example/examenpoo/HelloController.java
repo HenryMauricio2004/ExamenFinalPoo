@@ -35,7 +35,7 @@ public class HelloController implements Initializable {
 
         generadorDB.createDataBase();
         generadorDB.setDefaultRegistrations();
-        
+
     }
 
 
