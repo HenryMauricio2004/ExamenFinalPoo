@@ -1,5 +1,6 @@
 package org.example.examenpoo.DataBase;
 
+import org.example.examenpoo.DataBase.models.TarjetaCliente;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.TreeMap;
@@ -8,6 +9,7 @@ public class DatabaseController {
 
     String user; //00183223 guardar usuario mySQL para facilitar su acceso
     String password; //00183223 guardar contraseña mySQL para facilitar su acceso
+    String connectionString = "jdbc:mysql://localhost:3306/RegistrosBCN"
 
     public DatabaseController(){ //00183223 constructor de DatabaseController
         user = GeneradorDataBase.getInstance().getUser(); //00183223 obtener user almacenado en GeneradorDataBase
@@ -54,11 +56,38 @@ public class DatabaseController {
         } finally {
             return resultadosBusqueda; //00183223 retornar el treeMap generado
         }
-
-
-
     }
 
+    public ArrayList<TarjetaCliente> obtenerTarjetasPorCliente(int idCliente) {
+        ResultSet resultados = null; //00183223 ResultSet que se retornará (fuera del try para asegurar que siempre exista)
+        ArrayList<TarjetaCliente> tarjetas = new ArrayList<>();
 
+        try { //00183223 intentar procedimiento SQL
+            Connection connection = DriverManager.getConnection(connectionString, user, password); //00183223 obtener conexion con DB
+            PreparedStatement statement = connection.prepareStatement( //00183223 preparar instruccion SQL
+                    "SELECT id_Tarjeta, A.nombre\n" +
+                            "FROM registrosbcn.tarjeta AS T\n" +
+                            "INNER JOIN registrosbcn.asociado as A ON T.id_Asociado = A.id_Asociado\n" +
+                            "WHERE id_Cliente = ?"
+            );
+
+            statement.setInt(1, idCliente);
+            resultados = statement.executeQuery();
+
+            while (resultados.next()) {
+                TarjetaCliente tarjeta = new TarjetaCliente(
+                        resultados.getInt("id_Tarjeta"),
+                        resultados.getString("nombre")
+                );
+                tarjetas.add(tarjeta);
+            }
+
+            connection.close(); //00183223 cerrar conexion
+
+        } catch (SQLException e) {
+            System.out.println(e); //00183223 informar error en consola
+        }
+        return tarjetas;
+    }
 
 }
