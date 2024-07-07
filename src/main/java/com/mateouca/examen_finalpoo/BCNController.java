@@ -35,6 +35,7 @@ public class BCNController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         clientBCN = FXCollections.observableArrayList();//0030123 es crecar un ObservableList vacio para almacenar e ir guardando a los clientes del BCN
+        this.tblclient.setItems(clientBCN);//00030123 es para refrescar la tabla de los clientes del BCN y que se vayan mostrado a la tabla
 
         this.colNombres.setCellFactory(new PropertyValueFactory("name"));//00030123 para asociar las columnas al tema del modelo de la tabla de los clientes del BCN y que sepa que objeto tomar cada columna
         this.colFechas.setCellFactory(new PropertyValueFactory("date"));//00030123 para asociar las columnas al tema del modelo de la tabla de los clientes del BCN y que sepa que objeto tomar cada columna
@@ -45,7 +46,6 @@ public class BCNController implements Initializable {
 
     @FXML
     public void onComprasRealizadas(ActionEvent event){
-        String name = this.btnCompras.getText();
 
     }
 
