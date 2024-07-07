@@ -5,10 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
@@ -31,7 +28,7 @@ public class BCNController implements Initializable {
     @FXML
     private Button btnCompras , btnDinero , btnTarjetas , btnFacilitador;//00030123 seran los botenes de las opciones que se pueden realizar a la hora de consutar la base de datos
     @FXML
-    private Label lblCompras , lblDinero , lblTarjetas , lblFacilitador;//00030123 En estos labels de mostrara una pequeña informacion de lo que hace cada opcion de la vista del cliente del BCN
+    private TextArea txtDescrip;//00030123 En este TextArea se mostrara una pequeña informacion de lo que hace cada opcion de la vista del cliente del BCN
 
     private ObservableList<ClientBCN> clientBCN;//00030123 es una lista observable de los clientes del BCN
 
@@ -49,7 +46,6 @@ public class BCNController implements Initializable {
     @FXML
     public void onComprasRealizadas(ActionEvent event){
         String name = this.btnCompras.getText();
-        lblCompras.setText(name);
 
     }
 

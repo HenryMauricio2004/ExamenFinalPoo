@@ -7,7 +7,6 @@
     <list default="true" id="8076d00c-03c3-4355-b64b-703cae072816" name="Changes" comment="00030123 Subiendo cambios al repositorio del examen final de POO">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mateouca/examen_finalpoo/BCNController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mateouca/examen_finalpoo/BCNController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mateouca/examen_finalpoo/ClientBCN.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mateouca/examen_finalpoo/ClientBCN.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/mateouca/examen_finalpoo/BCN.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/mateouca/examen_finalpoo/BCN.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -78,7 +77,7 @@
       <option name="presentableId" value="Default" />
       <updated>1720233011758</updated>
       <workItem from="1720233015366" duration="2567000" />
-      <workItem from="1720313235631" duration="4965000" />
+      <workItem from="1720313235631" duration="7751000" />
     </task>
     <task id="LOCAL-00001" summary="00030123 Subiendo cambios al repositorio del examen final de POO">
       <option name="closed" value="true" />
@@ -104,7 +103,15 @@
       <option name="project" value="LOCAL" />
       <updated>1720317683446</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="00030123 Subiendo cambios al repositorio del examen final de POO">
+      <option name="closed" value="true" />
+      <created>1720323776928</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1720323776928</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
