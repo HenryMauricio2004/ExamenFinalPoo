@@ -9,7 +9,7 @@ public class DatabaseController {
 
     String user; //00183223 guardar usuario mySQL para facilitar su acceso
     String password; //00183223 guardar contraseña mySQL para facilitar su acceso
-    String connectionString = "jdbc:mysql://localhost:3306/RegistrosBCN"
+    String connectionString = "jdbc:mysql://localhost:3306/RegistrosBCN"; // Cadena de conexión para la base de datos MySQL ubicada en localhost, utilizando la base de datos "RegistrosBCN"
 
     public DatabaseController(){ //00183223 constructor de DatabaseController
         user = GeneradorDataBase.getInstance().getUser(); //00183223 obtener user almacenado en GeneradorDataBase
@@ -58,36 +58,36 @@ public class DatabaseController {
         }
     }
 
-    public ArrayList<TarjetaCliente> obtenerTarjetasPorCliente(int idCliente) {
-        ResultSet resultados = null; //00183223 ResultSet que se retornará (fuera del try para asegurar que siempre exista)
-        ArrayList<TarjetaCliente> tarjetas = new ArrayList<>();
+    public ArrayList<TarjetaCliente> obtenerTarjetasPorCliente(int idCliente) {// Método para obtener las tarjetas de un cliente por su ID
+        ResultSet resultados = null; // ResultSet que se retornará (fuera del try para asegurar que siempre exista)
+        ArrayList<TarjetaCliente> tarjetas = new ArrayList<>();// Lista para almacenar las tarjetas del cliente
 
-        try { //00183223 intentar procedimiento SQL
-            Connection connection = DriverManager.getConnection(connectionString, user, password); //00183223 obtener conexion con DB
-            PreparedStatement statement = connection.prepareStatement( //00183223 preparar instruccion SQL
-                    "SELECT id_Tarjeta, A.nombre\n" +
-                            "FROM registrosbcn.tarjeta AS T\n" +
-                            "INNER JOIN registrosbcn.asociado as A ON T.id_Asociado = A.id_Asociado\n" +
-                            "WHERE id_Cliente = ?"
+        try { // Intentar procedimiento SQL
+            Connection connection = DriverManager.getConnection(connectionString, user, password); //Obtener conexión con la DB
+            PreparedStatement statement = connection.prepareStatement( // preparar instruccion SQL
+                    "SELECT id_Tarjeta, A.nombre\n" + // Instrucción SQL para seleccionar id_Tarjeta y nombre del asociado
+                            "FROM registrosbcn.tarjeta AS T\n" + // Desde la tabla tarjeta con alias T
+                            "INNER JOIN registrosbcn.asociado as A ON T.id_Asociado = A.id_Asociado\n" + // Unir con la tabla asociado con alias A
+                            "WHERE id_Cliente = ?" // Condición donde id_Cliente sea igual al parámetro dado
             );
 
-            statement.setInt(1, idCliente);
-            resultados = statement.executeQuery();
+            statement.setInt(1, idCliente); // Establecer el valor del parámetro id_Cliente en la instrucción SQL
+            resultados = statement.executeQuery(); // Ejecutar la consulta
 
-            while (resultados.next()) {
-                TarjetaCliente tarjeta = new TarjetaCliente(
-                        resultados.getInt("id_Tarjeta"),
-                        resultados.getString("nombre")
+            while (resultados.next()) { // Iterar sobre los resultados
+                TarjetaCliente tarjeta = new TarjetaCliente( // Crear una nueva instancia de TarjetaCliente
+                        resultados.getInt("id_Tarjeta"), // Obtener el valor de id_Tarjeta
+                        resultados.getString("nombre") // Obtener el valor de nombre
                 );
-                tarjetas.add(tarjeta);
+                tarjetas.add(tarjeta); // Agregar la tarjeta a la lista
             }
 
-            connection.close(); //00183223 cerrar conexion
+            connection.close(); //cerrar conexion
 
-        } catch (SQLException e) {
-            System.out.println(e); //00183223 informar error en consola
+        } catch (SQLException e) { // Capturar excepción en caso de error SQL
+            System.out.println(e); //informar error en consola
         }
-        return tarjetas;
+        return tarjetas; // Retornar la lista de tarjetas
     }
 
 }
