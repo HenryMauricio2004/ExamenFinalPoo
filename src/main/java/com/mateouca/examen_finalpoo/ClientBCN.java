@@ -1,6 +1,7 @@
 package com.mateouca.examen_finalpoo;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class ClientBCN {
     //00030123 Atributos del cliente del BCN
@@ -69,5 +70,18 @@ public class ClientBCN {
 
     public void setMoney(double money) {
         this.money = money;
+    }
+
+    //00030123 se mete un equals para que cuando se meta una nueva persona a la base de datos no la meta por que ya esta registrada
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        final ClientBCN clientBCN = (ClientBCN) o;
+        return Double.compare(id, clientBCN.id) == 0 && card == clientBCN.card && Double.compare(money, clientBCN.money) == 0 && Objects.equals(name, clientBCN.name) && Objects.equals(lastname, clientBCN.lastname) && Objects.equals(date, clientBCN.date);
     }
 }

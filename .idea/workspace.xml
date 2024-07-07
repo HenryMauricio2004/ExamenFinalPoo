@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8076d00c-03c3-4355-b64b-703cae072816" name="Changes" comment="00030123 Subiendo cambios al repositorio del examen final de POO" />
+    <list default="true" id="8076d00c-03c3-4355-b64b-703cae072816" name="Changes" comment="00030123 Subiendo cambios al repositorio del examen final de POO">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mateouca/examen_finalpoo/BCNController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mateouca/examen_finalpoo/BCNController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mateouca/examen_finalpoo/ClientBCN.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mateouca/examen_finalpoo/ClientBCN.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/mateouca/examen_finalpoo/BCN.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/mateouca/examen_finalpoo/BCN.fxml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -24,6 +29,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
@@ -72,7 +78,7 @@
       <option name="presentableId" value="Default" />
       <updated>1720233011758</updated>
       <workItem from="1720233015366" duration="2567000" />
-      <workItem from="1720313235631" duration="2027000" />
+      <workItem from="1720313235631" duration="4965000" />
     </task>
     <task id="LOCAL-00001" summary="00030123 Subiendo cambios al repositorio del examen final de POO">
       <option name="closed" value="true" />
@@ -90,7 +96,15 @@
       <option name="project" value="LOCAL" />
       <updated>1720314577318</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="00030123 Subiendo cambios al repositorio del examen final de POO">
+      <option name="closed" value="true" />
+      <created>1720317683446</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1720317683446</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
