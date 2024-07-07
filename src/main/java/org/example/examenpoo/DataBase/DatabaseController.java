@@ -58,36 +58,32 @@ public class DatabaseController {
         }
     }
 
-    public ArrayList<TarjetaCliente> obtenerTarjetasPorCliente(int idCliente) {// Método para obtener las tarjetas de un cliente por su ID
-        ResultSet resultados = null; // ResultSet que se retornará (fuera del try para asegurar que siempre exista)
-        ArrayList<TarjetaCliente> tarjetas = new ArrayList<>();// Lista para almacenar las tarjetas del cliente
+    private ArrayList<TarjetaCliente> obtenerTarjetasPorCliente(int idCliente) {
+        ArrayList<TarjetaCliente> tarjetas = new ArrayList<>();
 
-        try { // Intentar procedimiento SQL
-            Connection connection = DriverManager.getConnection(connectionString, user, password); //Obtener conexión con la DB
-            PreparedStatement statement = connection.prepareStatement( // preparar instruccion SQL
-                    "SELECT id_Tarjeta, A.nombre\n" + // Instrucción SQL para seleccionar id_Tarjeta y nombre del asociado
-                            "FROM registrosbcn.tarjeta AS T\n" + // Desde la tabla tarjeta con alias T
-                            "INNER JOIN registrosbcn.asociado as A ON T.id_Asociado = A.id_Asociado\n" + // Unir con la tabla asociado con alias A
-                            "WHERE id_Cliente = ?" // Condición donde id_Cliente sea igual al parámetro dado
-            );
+        try (Connection connection = DriverManager.getConnection(connectionString, user, password);
+             PreparedStatement statement = connection.prepareStatement(
+                     "SELECT id_Tarjeta, tipoTarjeta, numTarjeta, fechaExpiracion " +
+                             "FROM tarjetas " +
+                             "WHERE id_Cliente = ?"
+             )) {
 
-            statement.setInt(1, idCliente); // Establecer el valor del parámetro id_Cliente en la instrucción SQL
-            resultados = statement.executeQuery(); // Ejecutar la consulta
+            statement.setInt(1, idCliente);
+            try (ResultSet resultados = statement.executeQuery()) {
+                while (resultados.next()) {
+                    int idTarjeta = resultados.getInt("id_Tarjeta");
+                    String tipoTarjeta = resultados.getString("tipoTarjeta");
+                    String numTarjeta = resultados.getString("numTarjeta");
+                    Date fechaExpiracion = resultados.getDate("fechaExpiracion");
 
-            while (resultados.next()) { // Iterar sobre los resultados
-                TarjetaCliente tarjeta = new TarjetaCliente( // Crear una nueva instancia de TarjetaCliente
-                        resultados.getInt("id_Tarjeta"), // Obtener el valor de id_Tarjeta
-                        resultados.getString("nombre") // Obtener el valor de nombre
-                );
-                tarjetas.add(tarjeta); // Agregar la tarjeta a la lista
+                    TarjetaCliente tarjeta = new TarjetaCliente(idTarjeta, tipoTarjeta, numTarjeta, fechaExpiracion);
+                    tarjetas.add(tarjeta);
+                }
             }
 
-            connection.close(); //cerrar conexion
-
-        } catch (SQLException e) { // Capturar excepción en caso de error SQL
-            System.out.println(e); //informar error en consola
+        } catch (SQLException e){
+            System.out.println(e);
         }
-        return tarjetas; // Retornar la lista de tarjetas
+        return tarjetas;
     }
-
 }
