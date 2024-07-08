@@ -53,7 +53,9 @@ public class GeneradorDataBase { //00183223 Clase para crear la base de datos de
                         "   id_tarjeta int NOT NULL PRIMARY KEY AUTO_INCREMENT," + //00183223 declarar clave primaria id_tarjeta
                         "   id_Asociado int NOT NULL," + //00183223 declarar parametro del id del asociado que creo la tarjeta
                         "   id_Cliente int NOT NULL," + //00183223 declarar parametro del id del cliente que utiliza la tarjeta
-                        "   tipoTarjeta varchar(15), " + //00183223 declarar parametro del tipo de tarjeta (credito o debito)
+                        "   tipoTarjeta varchar(15) NOT NULL, " + //00183223 declarar parametro del tipo de tarjeta (credito o debito)
+                        "   numTarjeta varchar(16) NOT NULL, " + //00082023 declarar parametro que corresponde al numero de la tarjeta
+                        "   fechaExpiracion Date NOT NULL, " + //00082023 declarar el parametro correspondiente a la fecha de expiración de la tarjeta
                         "   index(id_Asociado)," + //00183223 declarar id_asociado como indice para prepararlo como clave foranea
                         "   index(id_Cliente)," + //00183223 declarar id_cliente como indice para prepararlo como clave foranea
                         "   foreign key(id_Asociado) references Asociado(id_Asociado)," + //00183223 definir id_asociado como clave foranea de la tabla asociado
@@ -121,15 +123,15 @@ public class GeneradorDataBase { //00183223 Clase para crear la base de datos de
 
 
         //9 tarjetas
-        updateTarjeta(1,1,tarjeta[0]); //00183223 nueva tarjeta para pruebas del programa y SQL
-        updateTarjeta(1,2,tarjeta[1]); //00183223 nueva tarjeta para pruebas del programa y SQL
-        updateTarjeta(2,1,tarjeta[1]); //00183223 nueva tarjeta para pruebas del programa y SQL
-        updateTarjeta(3,3,tarjeta[0]); //00183223 nueva tarjeta para pruebas del programa y SQL
-        updateTarjeta(4,3,tarjeta[1]); //00183223 nueva tarjeta para pruebas del programa y SQL
-        updateTarjeta(5,4,tarjeta[1]); //00183223 nueva tarjeta para pruebas del programa y SQL
-        updateTarjeta(6,5,tarjeta[0]); //00183223 nueva tarjeta para pruebas del programa y SQL
-        updateTarjeta(7,4,tarjeta[1]); //00183223 nueva tarjeta para pruebas del programa y SQL
-        updateTarjeta(8,2,tarjeta[0]); //00183223 nueva tarjeta para pruebas del programa y SQL
+        updateTarjeta(1,1,tarjeta[0], "1234567890123456", Date.valueOf("2027-06-01")); //00183223 nueva tarjeta para pruebas del programa y SQL
+        updateTarjeta(1,2,tarjeta[1], "1931931831838139", Date.valueOf("2028-06-01")); //00183223 nueva tarjeta para pruebas del programa y SQL
+        updateTarjeta(2,1,tarjeta[1], "1026215810571474", Date.valueOf("2027-04-01")); //00183223 nueva tarjeta para pruebas del programa y SQL
+        updateTarjeta(3,3,tarjeta[0], "9461305476130787", Date.valueOf("2026-08-01")); //00183223 nueva tarjeta para pruebas del programa y SQL
+        updateTarjeta(4,3,tarjeta[1], "6646297315751878", Date.valueOf("2025-12-01")); //00183223 nueva tarjeta para pruebas del programa y SQL
+        updateTarjeta(5,4,tarjeta[1], "3124751340572507", Date.valueOf("2028-11-01")); //00183223 nueva tarjeta para pruebas del programa y SQL
+        updateTarjeta(6,5,tarjeta[0], "9764305420064570", Date.valueOf("2029-01-01")); //00183223 nueva tarjeta para pruebas del programa y SQL
+        updateTarjeta(7,4,tarjeta[1], "0123465768313301", Date.valueOf("2027-04-01")); //00183223 nueva tarjeta para pruebas del programa y SQL
+        updateTarjeta(8,2,tarjeta[0], "3164305405604272", Date.valueOf("2026-07-01")); //00183223 nueva tarjeta para pruebas del programa y SQL
 
         //10 Compras
         updateCompra(1,34.87f, Date.valueOf("2023-12-30")); //00183223 nueva Compra para pruebas del programa y SQL
@@ -142,8 +144,6 @@ public class GeneradorDataBase { //00183223 Clase para crear la base de datos de
         updateCompra(4,4.76f, Date.valueOf("2024-11-22")); //00183223 nueva Compra para pruebas del programa y SQL
         updateCompra(4,48.87f, Date.valueOf("2024-12-13")); //00183223 nueva Compra para pruebas del programa y SQL
         updateCompra(5,99.00f, Date.valueOf("2024-09-30")); //00183223 nueva Compra para pruebas del programa y SQL
-
-
 
     }
 
@@ -180,16 +180,17 @@ public class GeneradorDataBase { //00183223 Clase para crear la base de datos de
         }
     }
 
-    public void updateTarjeta(int id_cliente,int id_asociado, String tipoTarjeta){ //00183223 funcion para crear nueva tarjeta en DB
+    public void updateTarjeta(int id_cliente,int id_asociado, String tipoTarjeta, String numTarjeta, Date fechaExp){ //00183223 funcion para crear nueva tarjeta en DB
         try{ //00183223 intentar procedimiento SQL
 
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/registrosbcn", user, password); //00183223 obtener conexion con DB
 
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO Tarjeta(id_Asociado, id_Cliente, tipoTarjeta) VALUES (?, ?, ?)"); //00183223 preparar instruccion para crear nueva tarjeta
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO Tarjeta(id_Asociado, id_Cliente, tipoTarjeta, numTarjeta, fechaExpiracion) VALUES (?, ?, ?, ?, ?)"); //00183223 preparar instruccion para crear nueva tarjeta
             statement.setInt(1, id_asociado); //00183223 reemplazar primer ? por id de banco asociado dado por el usuario
             statement.setInt(2, id_cliente); //00183223 reemplazar segundo ? por id de cliente dueño de la tarjeta dado por el usuario
             statement.setString(3, tipoTarjeta); //00183223 reemplazar tercer ? por el tipo de tarjeta (credito o debito) dado por el usuario
-
+            statement.setString(4, numTarjeta); //00082023 reemplazar el cuarto ? por el numero de tarjeta
+            statement.setDate(5, fechaExp); //00082023 reemplazar el quinto ? por la fecha de expiracion
             statement.executeUpdate(); //00183223 ejecutar creacion de tarjeta en DB
 
             connection.close(); //00183223 cerrar conexion
