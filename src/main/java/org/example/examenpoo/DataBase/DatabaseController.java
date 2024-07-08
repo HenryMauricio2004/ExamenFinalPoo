@@ -9,7 +9,7 @@ public class DatabaseController {
 
     String user; //00183223 guardar usuario mySQL para facilitar su acceso
     String password; //00183223 guardar contraseña mySQL para facilitar su acceso
-    String connectionString = "jdbc:mysql://localhost:3306/RegistrosBCN"; // Cadena de conexión para la base de datos MySQL ubicada en localhost, utilizando la base de datos "RegistrosBCN"
+    String connectionString = "jdbc:mysql://localhost:3306/RegistrosBCN"; //00082023 Cadena de conexión para la base de datos MySQL ubicada en localhost, utilizando la base de datos "RegistrosBCN"
 
     public DatabaseController(){ //00183223 constructor de DatabaseController
         user = GeneradorDataBase.getInstance().getUser(); //00183223 obtener user almacenado en GeneradorDataBase
@@ -58,29 +58,31 @@ public class DatabaseController {
         }
     }
 
-    private ArrayList<TarjetaCliente> obtenerTarjetasPorCliente(int idCliente) {
+    public ArrayList<TarjetaCliente> obtenerTarjetasPorCliente(int idCliente) {
         ArrayList<TarjetaCliente> tarjetas = new ArrayList<>();
 
-        try (Connection connection = DriverManager.getConnection(connectionString, user, password);
-             PreparedStatement statement = connection.prepareStatement(
-                     "SELECT id_Tarjeta, tipoTarjeta, numTarjeta, fechaExpiracion " +
-                             "FROM tarjetas " +
-                             "WHERE id_Cliente = ?"
-             )) {
+        try {
+            Connection connection = DriverManager.getConnection(connectionString, user, password);
+            PreparedStatement statement = connection.prepareStatement(
+                    "SELECT id_Tarjeta, tipoTarjeta, numTarjeta, fechaExpiracion " +
+                            "FROM tarjeta " +
+                            "WHERE id_Cliente = ?"
+            );
 
             statement.setInt(1, idCliente);
-            try (ResultSet resultados = statement.executeQuery()) {
-                while (resultados.next()) {
-                    int idTarjeta = resultados.getInt("id_Tarjeta");
-                    String tipoTarjeta = resultados.getString("tipoTarjeta");
-                    String numTarjeta = resultados.getString("numTarjeta");
-                    Date fechaExpiracion = resultados.getDate("fechaExpiracion");
+            ResultSet resultados = statement.executeQuery();
 
-                    TarjetaCliente tarjeta = new TarjetaCliente(idTarjeta, tipoTarjeta, numTarjeta, fechaExpiracion);
-                    tarjetas.add(tarjeta);
-                }
+            while (resultados.next()) {
+                int idTarjeta = resultados.getInt("id_Tarjeta");
+                String tipoTarjeta = resultados.getString("tipoTarjeta");
+                String numTarjeta = resultados.getString("numTarjeta");
+                Date fechaExpiracion = resultados.getDate("fechaExpiracion");
+
+                TarjetaCliente tarjeta = new TarjetaCliente(idTarjeta, tipoTarjeta, numTarjeta, fechaExpiracion);
+                tarjetas.add(tarjeta);
             }
 
+            System.out.println(tarjetas);
         } catch (SQLException e){
             System.out.println(e);
         }
