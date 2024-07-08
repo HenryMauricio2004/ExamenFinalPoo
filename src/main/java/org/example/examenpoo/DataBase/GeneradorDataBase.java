@@ -189,8 +189,8 @@ public class GeneradorDataBase { //00183223 Clase para crear la base de datos de
             statement.setInt(1, id_asociado); //00183223 reemplazar primer ? por id de banco asociado dado por el usuario
             statement.setInt(2, id_cliente); //00183223 reemplazar segundo ? por id de cliente dueño de la tarjeta dado por el usuario
             statement.setString(3, tipoTarjeta); //00183223 reemplazar tercer ? por el tipo de tarjeta (credito o debito) dado por el usuario
-            statement.setString(4, numTarjeta);
-            statement.setDate(5, fechaExp);
+            statement.setString(4, numTarjeta); //00082023 reemplazar el cuarto ? por el numero de tarjeta
+            statement.setDate(5, fechaExp); //00082023 reemplazar el quinto ? por la fecha de expiracion
             statement.executeUpdate(); //00183223 ejecutar creacion de tarjeta en DB
 
             connection.close(); //00183223 cerrar conexion

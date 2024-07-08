@@ -58,34 +58,39 @@ public class DatabaseController {
         }
     }
 
-    public ArrayList<TarjetaCliente> obtenerTarjetasPorCliente(int idCliente) {
-        ArrayList<TarjetaCliente> tarjetas = new ArrayList<>();
+    public ArrayList<TarjetaCliente> obtenerTarjetasPorCliente(int idCliente) { //00082023 Método para obtener tarjetas por cliente
+        ArrayList<TarjetaCliente> tarjetas = new ArrayList<>(); //00082023 Establece la conexión a la base de datos
 
-        try {
-            Connection connection = DriverManager.getConnection(connectionString, user, password);
-            PreparedStatement statement = connection.prepareStatement(
-                    "SELECT id_Tarjeta, tipoTarjeta, numTarjeta, fechaExpiracion " +
-                            "FROM tarjeta " +
-                            "WHERE id_Cliente = ?"
-            );
+        try { //00082023 Prepara la consulta SQL
+            Connection connection = DriverManager.getConnection(connectionString, user, password); //00082023 Conexión a la base de datos
+            PreparedStatement statement = connection.prepareStatement( //00082023 Preparación de la consulta SQL
+                    "SELECT id_Tarjeta, tipoTarjeta, numTarjeta, fechaExpiracion " + //00082023 Selección de columnas
+                            "FROM tarjeta " + //00082023 Tabla de la que se seleccionan los dato
+                            "WHERE id_Cliente = ?" //00082023 Condición para el cliente específico
+            ); //00082023 Fin de la preparación de la consulta
 
-            statement.setInt(1, idCliente);
-            ResultSet resultados = statement.executeQuery();
+            statement.setInt(1, idCliente); //00082023 Establecer el id del cliente en la consulta
+            ResultSet resultados = statement.executeQuery(); //00082023 Ejecución de la consulta y obtención de resultados
 
-            while (resultados.next()) {
-                int idTarjeta = resultados.getInt("id_Tarjeta");
-                String tipoTarjeta = resultados.getString("tipoTarjeta");
-                String numTarjeta = resultados.getString("numTarjeta");
-                Date fechaExpiracion = resultados.getDate("fechaExpiracion");
+            while (resultados.next()) { //00082023 Iteración sobre los resultados
+                int idTarjeta = resultados.getInt("id_Tarjeta"); //00082023 Obtener id de la tarjeta
+                String tipoTarjeta = resultados.getString("tipoTarjeta"); //00082023 Obtener tipo de tarjeta
+                String numTarjeta = resultados.getString("numTarjeta"); //00082023 Obtener número de tarjeta
+                Date fechaExpiracion = resultados.getDate("fechaExpiracion"); //00082023 Obtener fecha de expiración
 
-                TarjetaCliente tarjeta = new TarjetaCliente(idTarjeta, tipoTarjeta, numTarjeta, fechaExpiracion);
-                tarjetas.add(tarjeta);
+                TarjetaCliente tarjeta = new TarjetaCliente(idTarjeta, tipoTarjeta, censurarNumTarjeta(numTarjeta), fechaExpiracion); //00082023 Crear objeto TarjetaCliente
+                tarjetas.add(tarjeta); //00082023 Agregar la tarjeta a la lista
             }
 
-            System.out.println(tarjetas);
-        } catch (SQLException e){
-            System.out.println(e);
+            System.out.println(tarjetas); //00082023 Imprimir la lista de tarjetas
+        } catch (SQLException e){ //00082023 Captura de excepciones SQL
+            System.out.println(e); //00082023 Imprimir la excepción
         }
-        return tarjetas;
+        return tarjetas; //00082023 Retornar la lista de tarjetas
+    }
+    private String censurarNumTarjeta(String numeroTarjeta) { //00082023 Método para censurar el número de la tarjeta
+        int length = numeroTarjeta.length(); //00082023 Obtener la longitud del número de tarjeta
+        String ultimosCuatro = numeroTarjeta.substring(length - 4); //00082023 Obtener los últimos cuatro dígitos
+        return "XXXX XXXX XXXX " + ultimosCuatro; //00082023 Retornar el número censurado mediante las "X"
     }
 }
