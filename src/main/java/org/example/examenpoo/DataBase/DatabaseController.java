@@ -15,13 +15,13 @@ public class DatabaseController {
     }
 
 
-    public TreeMap<Integer, ArrayList<String>> getComprasPorCliente(int id_cliente, Date fechaInicio, Date fechaFinal){ //00183223 funcion para obtener los registros de compra de un cliente en un lapso de tiempo en la DB
+    public TreeMap<Integer, ArrayList<String>> getComprasPorCliente(int id_cliente, Date fechaInicio, Date fechaFinal) throws SQLException { //00183223 funcion para obtener los registros de compra de un cliente en un lapso de tiempo en la DB
 
         TreeMap<Integer, ArrayList<String>> resultadosBusqueda = new TreeMap<Integer, ArrayList<String>>(); //00183223 TreeMap donde se almacenaran los resultados de busqueda (key -> id_compra)
 
-        ResultSet resultados = null; //00183223 ResultSet que se retornará (fuera del try para asegurar que siempre exista)
+        Connection connection = null;
         try{ //00183223 intentar procedimiento SQL
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/RegistrosBCN", user, password); //00183223 obtener conexion con DB
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/RegistrosBCN", user, password); //00183223 obtener conexion con DB
             PreparedStatement statement = connection.prepareStatement( //00183223 preparar instruccion SQL
                     "SELECT cliente.id_cliente as id_cliente, cliente.nombre as nombre, cliente.apellido as apellido, " + //00183223 seleccionar id, nombre y apellido de cliente
                             "compra.id_compra as id, compra.montoTotal as monto, compra.fecha " + //00183223 seleccionar id, monto y fecha de compra
@@ -35,7 +35,7 @@ public class DatabaseController {
             statement.setDate(2, fechaInicio); //00183223 reemplazar segundo ? por la fecha de inicio de lapso
             statement.setDate(3, fechaFinal);//00183223 reemplazar tercer ? por la fecha de final de lapso
 
-            resultados = statement.executeQuery(); //00183223 ejecutar busqueda
+            ResultSet resultados = statement.executeQuery(); //00183223 ejecutar busqueda
 
             while (resultados.next()){ //00183223 evaluar cada instancia de los resultados
                 ArrayList<String> detalles = new ArrayList<>(); //00183223 declarar array para contener los elementos de los resultados
@@ -48,55 +48,60 @@ public class DatabaseController {
                 resultadosBusqueda.put(resultados.getInt("id"), detalles); //00183223 agregar al diccionario el array de detalles y usar el id de la compra como key
             }
 
-            connection.close(); //00183223 cerrar conexion
+
         } catch (SQLException e){ //00183223 atrapar error en SQL
             System.out.println(e); //00183223 informar error en consola
         } finally {
+
+            if (!connection.isClosed()){ //00183223 verificar si la conexion aún no ha sido cerrada
+                connection.close(); //00183223 cerrar conexion
+            }
+
             return resultadosBusqueda; //00183223 retornar el treeMap generado
         }
 
     }
 
-    public TreeMap<Integer, ArrayList<String>> getTarjetasAsociado(int id_asociado) throws SQLException {
+    public TreeMap<Integer, ArrayList<String>> getTarjetasAsociado(int id_asociado) throws SQLException { //00183223 funcion para obtener registros sobre los clientes con compras hechas por una tarjeta de Asociado específico
 
         TreeMap<Integer, ArrayList<String>> resultadosBusqueda = new TreeMap<Integer, ArrayList<String>>(); //00183223 TreeMap donde se almacenaran los resultados de busqueda (key -> id_compra)
 
-        Connection connection = null;
+        Connection connection = null; //00183223 declarar conexion
 
-        try{
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/registrosBCN", user, password);
+        try{ //00183223 intentar procedimiento SQL
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/registrosBCN", user, password); //00183223 inicializar conexióñ a DB
 
-            PreparedStatement statement = connection.prepareStatement("select cliente.id_cliente as id_cliente, cliente.nombre as nombre, cliente.apellido as apellido, count(compra.id_compra) as cantCompras, sum(compra.montoTotal) as montoTotal " +
-                    "from compra inner join tarjeta on compra.id_tarjeta = tarjeta.id_tarjeta " +
-                    "inner join cliente on tarjeta.id_cliente = cliente.id_cliente " +
-                    "where tarjeta.id_asociado = ? " +
-                    "group by cliente.id_cliente;");
+            PreparedStatement statement = connection.prepareStatement("select cliente.id_cliente as id_cliente, cliente.nombre as nombre, cliente.apellido as apellido, count(compra.id_compra) as cantCompras, sum(compra.montoTotal) as montoTotal " + //00183223 Seleccionar id, nombre y apellido de cliente, cantidad de compras y suma de monto gastado en todas las compras hechas por el cliente
+                    "from compra inner join tarjeta on compra.id_tarjeta = tarjeta.id_tarjeta " + //00183223 obtener datos de intersección entre tabla compra y tarjeta
+                    "inner join cliente on tarjeta.id_cliente = cliente.id_cliente " + //00183223 intersectar el inner join anterior con la tabla cliente
+                    "where tarjeta.id_asociado = ? " + //00183223 filtrar datos a unicamente donde el id del asociado de la tarjeta sea equivalente a un valor específico
+                    "group by cliente.id_cliente;"); //00183223 agrupar datos por id de cliente (obligatorio por usar funciones sum() y count())
 
-            System.out.println(statement);
-            statement.setInt(1, id_asociado);
+            statement.setInt(1, id_asociado); //00183223 reemplazar primer ? por el id_asociado ingresado por el usuario
 
-            ResultSet resultados = statement.executeQuery();
+            ResultSet resultados = statement.executeQuery(); //00183223 ejecutar busqueda
 
-            while (resultados.next()){
+            while (resultados.next()){ //00183223 evaluar cada instancia de los resultados
 
-                ArrayList<String> detalles = new ArrayList<>();
+                ArrayList<String> detalles = new ArrayList<>(); //00183223 declarar array para contener los elementos de los resultados
 
-                detalles.add(resultados.getString("nombre"));
-                detalles.add(resultados.getString("apellido"));
-                detalles.add(resultados.getInt("cantCompras") + "");
-                detalles.add(resultados.getFloat("montoTotal") + "");
+                detalles.add(resultados.getString("nombre")); //00183223 agregar el nombre del cliente al array
+                detalles.add(resultados.getString("apellido")); //00183223 agregar el apellido del cliente al array
+                detalles.add(resultados.getInt("cantCompras") + ""); //00183223 agregar el nombre del cliente al array
+                detalles.add(resultados.getFloat("montoTotal") + ""); //00183223 agregar el nombre del cliente al array
 
-                resultadosBusqueda.put(resultados.getInt("id_cliente"), detalles);
+                resultadosBusqueda.put(resultados.getInt("id_cliente"), detalles); //00183223 agregar al diccionario el array de detalles y usar el id del cliente como key
             }
 
-        } catch (SQLException e){
-            System.out.println(e);
+        } catch (SQLException e){ //00183223 atrapar error SQL
+            System.out.println(e); //00183223 informar error por consola
         }finally{
-            if(!connection.isClosed()){
-                connection.close();
+
+            if(!connection.isClosed()){ //00183223 verificar si la conexión aún no ha sido cerrada
+                connection.close(); //00183223 cerrar la conexión SQL
             }
 
-            return resultadosBusqueda;
+            return resultadosBusqueda; //00183223 retornar los resultados de la busqueda
         }
 
     }
