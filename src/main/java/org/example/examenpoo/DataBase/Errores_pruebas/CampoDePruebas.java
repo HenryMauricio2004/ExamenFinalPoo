@@ -19,13 +19,12 @@ public class CampoDePruebas
                 generadorDB.setUser(user); //00133723 mandamos el usuario ya para uso
                 generadorDB.setPassword(pass); //00133723 mandamos la contraseña para uso
 
-                DatabaseController controller = new DatabaseController(); //00133723 Iniciamos ya con la creacion de la base de datos
+                DatabaseController controller = DatabaseController.getInstance(); //00133723 Iniciamos ya con la creacion de la base de datos
+
 
                 generadorDB.createDataBase(); //00133723 Se crea la base de datos
 
                 generadorDB.setDefaultRegistrations(); //00133723 Se pobla la DB
-
-                controller.obtenerTarjetasPorCliente(1);
 
                 flag = true; //00133723 Si todo salio bien, entonces nos devolvera un true
             }

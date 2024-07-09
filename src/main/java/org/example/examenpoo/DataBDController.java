@@ -72,4 +72,6 @@ public class DataBDController implements Initializable
             System.out.println(e.getMessage()); //00133723 Error personalizado por si no se ejecuta bien la ventana
         }
     }
+
+
 }
