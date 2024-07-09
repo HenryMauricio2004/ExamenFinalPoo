@@ -25,10 +25,9 @@ public class ComprasController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-
-
-
+            DatabaseController dtb = DatabaseController.getInstance();
     }
+
 
     @FXML public void GuardarData()
     {

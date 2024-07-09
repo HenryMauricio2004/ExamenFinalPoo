@@ -78,8 +78,8 @@ public class DatabaseController {
 
     }
 
-    public TreeMap<Integer, String> obtenerGastoPorMes(int idCliente, int year, int month) { //00082023 Método para obtener el gasto por año y mes del cliente
-        TreeMap<Integer, String> resultadosBusqueda = new TreeMap<>(); //00082023 Inicialización del TreeMap que contendrá los resultados de la búsqueda
+    public TreeMap<Integer, ArrayList<String>> obtenerGastoPorMes(int idCliente, int year, int month) { //00082023 Método para obtener el gasto por año y mes del cliente
+        TreeMap<Integer, ArrayList<String>> resultadosBusqueda = new TreeMap<>(); //00082023 Inicialización del TreeMap que contendrá los resultados de la búsqueda
         try { //00082023 Prepara la consulta SQL
             Connection connection = DriverManager.getConnection(connectionString, user, password); //00082023 Conexión a la base de datos
             PreparedStatement statement = connection.prepareStatement( //00082023 Preparación de la consulta SQL
@@ -97,14 +97,19 @@ public class DatabaseController {
 
             while (resultados.next()) { //00082023 Iteración sobre los resultados
                 double dineroGastado = resultados.getDouble("dineroGastado"); //00082023 Obtener el monto total gastado
-                resultadosBusqueda.put(1, Double.toString(dineroGastado)); //00082023 Añadir el monto total gastado al TreeMap
+                ArrayList<String> arrayList = new ArrayList<>(); //00082023 arrayList que almacena el resultado
+                arrayList.add(dineroGastado + ""); //00082023 agregar el dinero total en el arreglo
+
+                resultadosBusqueda.put(1, arrayList); //00082023 Añadir el monto total gastado al TreeMap
             }
 
             connection.close(); //00082023 Cerrar la conexión después de la consulta
         } catch (SQLException e) { //00082023 Captura de excepciones SQL
             System.out.println(e); //00082023 Imprimir la excepción
+        } finally {
+            return resultadosBusqueda; //00082023 Retornar el TreeMap con el monto total
         }
-        return resultadosBusqueda; //00082023 Retornar el TreeMap con el monto total
+
     }
 
     public TreeMap<Integer, ArrayList<String>> getTarjetasPorCliente(int idCliente){ //00082023 Método para obtener tarjetas por cliente
