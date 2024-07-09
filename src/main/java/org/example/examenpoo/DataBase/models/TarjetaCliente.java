@@ -9,7 +9,7 @@ public class TarjetaCliente { //00082023 Definición de la clase TarjetaCliente
 
     public TarjetaCliente(int idTarjeta, String tipoTarjeta, String numTarjeta, Date fechaExpiracion) { //00082023 Constructor de la clase
         this.idTarjeta = idTarjeta; //00082023 Asigna el identificador de la tarjeta
-        this.tipoTarjeta = tipoTarjeta; //00082023 Asigna el tipo de tarjeta
+        this.tipoTarjeta = tipoTarjeta; //00082023 Asigna el tipo de tarjetaq
         this.numTarjeta = numTarjeta; //00082023 Asigna el número de la tarjeta
         this.fechaExpiracion = fechaExpiracion; //00082023 Asigna la fecha de expiración
     } //00082023 Fin del constructor
