@@ -30,25 +30,57 @@
                         <Insets left="10.0" />
                      </VBox.margin>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="619.0" spacing="30.0">
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="619.0" spacing="50.0">
                      <children>
-                        <Label text="Ingrese la fecha Inicial" />
-                        <TextField fx:id="txtACampoFecha1" />
-                        <Label fx:id="lbCampoVacio2" text="Campo vacío" />
+                        <Label text="Fecha inicial" />
+                        <VBox alignment="CENTER" prefHeight="60.0" prefWidth="83.0">
+                           <children>
+                              <Label text="Ingresar dia" />
+                              <TextField fx:id="txtADia1" prefHeight="30.0" prefWidth="123.0" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <Label text="Ingresar mes" />
+                              <TextField fx:id="txtAMes1" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <Label text="Ingresar año" />
+                              <TextField fx:id="txtAYear1" />
+                           </children>
+                        </VBox>
                      </children>
                      <padding>
                         <Insets left="10.0" />
                      </padding>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
-                     <children>
-                        <Label text="Ingrese la fecha final" />
-                        <TextField fx:id="txtACampoFecha2" />
-                        <Label fx:id="lbCampoVacio3" text="Campo vacío" />
-                     </children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
                      <padding>
                         <Insets left="10.0" />
                      </padding>
+                     <children>
+                        <Label text="Fecha final" />
+                        <VBox alignment="CENTER" prefHeight="60.0" prefWidth="101.0">
+                           <children>
+                              <Label text="Ingresar dia" />
+                              <TextField fx:id="txtADia2" prefHeight="30.0" prefWidth="103.0" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="60.0" prefWidth="83.0">
+                           <children>
+                              <Label text="Ingresar mes" />
+                              <TextField fx:id="txtAMes2" prefHeight="30.0" prefWidth="123.0" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="60.0" prefWidth="83.0">
+                           <children>
+                              <Label text="Ingresar año" />
+                              <TextField fx:id="txtAYear2" prefHeight="30.0" prefWidth="123.0" />
+                           </children>
+                        </VBox>
+                     </children>
                   </HBox>
                </children>
             </VBox>
@@ -56,7 +88,6 @@
                <children>
                   <Button fx:id="btmValores0" mnemonicParsing="false" onAction="#BorrarDatos" text="Borrar datos" />
                   <Button fx:id="btmGuardarTodo" mnemonicParsing="false" onAction="#GuardarData" text="Guardar datos" />
-                  <Button fx:id="btmRegresar" mnemonicParsing="false" text="Regresar" />
                </children>
             </HBox>
          </children>

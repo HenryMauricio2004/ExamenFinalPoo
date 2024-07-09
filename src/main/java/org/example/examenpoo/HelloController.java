@@ -73,6 +73,39 @@ public class HelloController implements Initializable {
         stage.show(); //00133723 Nos muestra ya la ventana
 
     }
+    @FXML public void tarjetasAsociados() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("TarjetasAsociadasPorID.fxml")); //00133723 creamos un loader para cargar la ventana
+        Scene scene = new Scene(loader.load(),700,400); //00133723 Dimensiones para la ventana
+        Stage stage = new Stage(); //00133723 Para que se cree la visualizacion de nuestra ventana
+
+        stage.setResizable(false); //00133723 para algo
+        stage.setTitle("Busquedas DB"); //00133723 Nombre del titulo personalizado para la ventana
+        stage.setScene(scene); //00133723 Para que pueda saber que ventana va mostrar
+        stage.show(); //00133723 Nos muestra ya la ventana
+    }
+
+    @FXML public void dineroPorMes () throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("DineroGastadoPorMes.fxml")); //00133723 creamos un loader para cargar la ventana
+        Scene scene = new Scene(loader.load(),700,400); //00133723 Dimensiones para la ventana
+        Stage stage = new Stage(); //00133723 Para que se cree la visualizacion de nuestra ventana
+
+        stage.setResizable(false); //00133723 para algo
+        stage.setTitle("Busquedas DB"); //00133723 Nombre del titulo personalizado para la ventana
+        stage.setScene(scene); //00133723 Para que pueda saber que ventana va mostrar
+        stage.show(); //00133723 Nos muestra ya la ventana
+    }
+
+    @FXML public void ClienteAsociadoFacilitador() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ClienteAsociadoFacilitador.fxml")); //00133723 creamos un loader para cargar la ventana
+        Scene scene = new Scene(loader.load(),700,400); //00133723 Dimensiones para la ventana
+        Stage stage = new Stage(); //00133723 Para que se cree la visualizacion de nuestra ventana
+
+        stage.setResizable(false); //00133723 para algo
+        stage.setTitle("Busquedas DB"); //00133723 Nombre del titulo personalizado para la ventana
+        stage.setScene(scene); //00133723 Para que pueda saber que ventana va mostrar
+        stage.show(); //00133723 Nos muestra ya la ventana
+    }
+
 
 
     private void imprimirTreeMap(TreeMap<Integer, ArrayList<String>> treeMap){
