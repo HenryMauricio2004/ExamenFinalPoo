@@ -26,32 +26,31 @@ public class DataBDController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-        lbMessError.setVisible(false);
-        btmCargar.setVisible(false);
-
+        lbMessError.setVisible(false); //00133723 Lo hacemos invisible para que emita el error luego
+        btmCargar.setVisible(false); //00133723 Nuestro botón para la otra ventana debe de permanecer oculto
 
     }
 
     @FXML public void limpiar ()
     {
-        textAUsurio.setText("");
-        txtAClave.setText("");
+        textAUsurio.setText(""); //00133723 Para que el usuario no los borre por su cuenta
+        txtAClave.setText(""); //00133723 Para que el usuario no los borre por su cuenta
     }
 
     @FXML public void Acceder ()
     {
-        CampoDePruebas CMP = new CampoDePruebas();
+        CampoDePruebas CMP = new CampoDePruebas(); //00133723 Creamos la instancia de la clase CampoDePruebas para ejecutar las validaciones necesarias
 
-        if(!CMP.accesoSQL(textAUsurio.getText(), txtAClave.getText()))
+        if(!CMP.accesoSQL(textAUsurio.getText(), txtAClave.getText())) //00133723 La funcion nos ayuda a informar al usuario que los datos son erroneos
         {
-            lbMessError.setVisible(true);
+            lbMessError.setVisible(true); //00133723 Para que el usuario vea su error
         }
         else
         {
-            lbMessError.setText("Yai");
-            btmCargar.setVisible(true);
-            txtAClave.setVisible(false);
-            textAUsurio.setVisible(false);
+            lbMessError.setText("Yai"); //00133723 Mensaje de que las cuentas son validad
+            btmCargar.setVisible(true); //00133723 Para que el usuario pueda ir a la siguiente ventana
+            txtAClave.setVisible(false); //00133723 Para que no escriba nada despues de esto
+            textAUsurio.setVisible(false); //00133723 Para que no escriba nada despues de esto
         }
     }
 
@@ -59,19 +58,18 @@ public class DataBDController implements Initializable
     {
         try
         {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
-            Scene scene = new Scene(loader.load(),700,400);
-            Stage stage = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("hello-view.fxml")); //00133723 creamos un loader para cargar la ventana
+            Scene scene = new Scene(loader.load(),700,400); //00133723 Dimensiones para la ventana
+            Stage stage = new Stage(); //00133723 Para que se cree la visualizacion de nuestra ventana
 
-            stage.setResizable(false);
-            stage.setTitle("Busquedas DB");
-            stage.setScene(scene);
-            stage.show();
-            stage.show();
+            stage.setResizable(false); //00133723 para algo
+            stage.setTitle("Busquedas DB"); //00133723 Nombre del titulo personalizado para la ventana
+            stage.setScene(scene); //00133723 Para que pueda saber que ventana va mostrar
+            stage.show(); //00133723 Nos muestra ya la ventana
 
         } catch (IOException e)
         {
-            System.out.println(e.getMessage());
+            System.out.println(e.getMessage()); //00133723 Error personalizado por si no se ejecuta bien la ventana
         }
     }
 }

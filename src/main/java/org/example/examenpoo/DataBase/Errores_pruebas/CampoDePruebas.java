@@ -9,30 +9,30 @@ public class CampoDePruebas
 
     public boolean accesoSQL(String user,String pass)
     {
-        GeneradorDataBase generadorDB = GeneradorDataBase.getInstance();
-        Errors errors = new Errors();
-        boolean flag = false;
+        GeneradorDataBase generadorDB = GeneradorDataBase.getInstance(); //00133723 Mandamos a llamar la instancia BD
+        Errors errors = new Errors(); //00133723 Creamos a los Errors para validar errores
+        boolean flag = false; //00133723 por defecto le decimos que no se ha cumplido nada
 
-        if (errors.empyName(user,pass) == 1)
+        if (errors.empyName(user,pass) == 1) //00133723 Evaluacion gracias a la clase Errors
         {
-            if (errors.PruebaConexion(user,pass)!=null)
+            if (errors.PruebaConexion(user,pass)!=null) //00133723 Le preguntamos si fue posible crear la conexion
             {
-                generadorDB.setUser(user);
-                generadorDB.setPassword(pass);
+                generadorDB.setUser(user); //00133723 mandamos el usuario ya para uso
+                generadorDB.setPassword(pass); //00133723 mandamos la contraseña para uso
 
-                DatabaseController controller = new DatabaseController();
+                DatabaseController controller = new DatabaseController(); //00133723 Iniciamos ya con la creacion de la base de datos
 
-                generadorDB.createDataBase();
+                generadorDB.createDataBase(); //00133723 Se crea la base de datos
 
-                generadorDB.setDefaultRegistrations();
+                generadorDB.setDefaultRegistrations(); //00133723 Se pobla la DB
 
                 controller.obtenerTarjetasPorCliente(1);
 
-                flag = true;
+                flag = true; //00133723 Si todo salio bien, entonces nos devolvera un true
             }
         }
 
-        return flag;
+        return flag; //00133723 retorno para la ultima evaluacion
     }
 
 }
