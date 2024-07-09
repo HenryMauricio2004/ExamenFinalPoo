@@ -63,24 +63,24 @@ public class DatabaseController {
         }
     }
     public double obtenerGastoPorMes(int idCliente, int year, int month) { //00082023 Método para obtener el gasto por año y mes del cliente
-        double montoTotal = 0.0;
+        double montoTotal = 0.0; //declaracion de variable montoTotal
         try { //00082023 Prepara la consulta SQL
             Connection connection = DriverManager.getConnection(connectionString, user, password); //00082023 Conexión a la base de datos
             PreparedStatement statement = connection.prepareStatement( //00082023 Preparación de la consulta SQL
-                    "SELECT SUM(montoTotal) as dineroGastado" +
-                            "FROM compra c" +
-                            "INNER JOIN tarjeta t ON c.id_Tarjeta = t.id_Tarjeta" +
-                            "INNER JOIN cliente cl ON cl.id_Cliente = t.id_Cliente" +
-                            "WHERE cl.id_Cliente = ? AND MONTH(c.fecha) = ? AND YEAR(c.fecha) = ?"
+                    "SELECT SUM(montoTotal) as dineroGastado" + //00082023 Selección de la suma del monto total
+                            "FROM compra c" + //00082023 Tabla de compras con alias c
+                            "INNER JOIN tarjeta t ON c.id_Tarjeta = t.id_Tarjeta" + //00082023 Unión interna con la tabla de tarjetas
+                            "INNER JOIN cliente cl ON cl.id_Cliente = t.id_Cliente" + //00082023 Unión interna con la tabla de clientes
+                            "WHERE cl.id_Cliente = ? AND MONTH(c.fecha) = ? AND YEAR(c.fecha) = ?" //00082023 Condiciones para cliente, mes y año
             ); //00082023 Fin de la preparación de la consulta
 
-            statement.setInt(1, idCliente);
-            statement.setInt(2, month);
-            statement.setInt(3, year);
+            statement.setInt(1, idCliente); //00082023 Establecer el id del cliente en la consulta
+            statement.setInt(2, month); //00082023 Establecer el mes en la consulta
+            statement.setInt(3, year); //00082023 Establecer el año en la consulta
             ResultSet resultados = statement.executeQuery(); //00082023 Ejecución de la consulta y obtención de resultados
 
             while (resultados.next()) { //00082023 Iteración sobre los resultados
-                montoTotal = resultados.getFloat ("dineroGastado");
+                montoTotal = resultados.getDouble("dineroGastado"); //00082023 Obtener el monto total gastado
 
             }
 
