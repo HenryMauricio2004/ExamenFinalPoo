@@ -19,13 +19,13 @@
 
                   <Button fx:id="btn_ComprasLapso" mnemonicParsing="false" onAction="#comprasTiempo" prefWidth="200.0" text="Compras en lapso de tiempo" />
 
-                  <Button fx:id="btn_DineroGastado" mnemonicParsing="false" prefWidth="200.0" text="Dinero total gastado por mes" />
+                  <Button fx:id="btn_DineroGastado" mnemonicParsing="false" onAction="#dineroPorMes" prefWidth="200.0" text="Dinero total gastado por mes" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="42.0" prefWidth="579.0" spacing="20.0">
                <children>
-                  <Button fx:id="btn_TarjetasClientes" mnemonicParsing="false" prefWidth="200.0" text="Tarjetas de Cliente" />
-                  <Button fx:id="btn_ClientesAsociados" mnemonicParsing="false" onAction="#accionBtn_ClientesAsociados" prefWidth="200.0" text="Clientes con tarjeta de Asociado" />
+                  <Button fx:id="btn_TarjetasClientes" mnemonicParsing="false" onAction="#tarjetasAsociados" prefWidth="200.0" text="Tarjetas de Cliente" />
+                  <Button mnemonicParsing="false" onAction="#ClienteAsociadoFacilitador" prefWidth="200.0" text="Clientes con tarjeta de Asociado" />
                </children>
             </HBox>
          </children>

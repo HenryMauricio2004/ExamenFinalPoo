@@ -15,48 +15,43 @@ public class ComprasController implements Initializable
 {
 
     @FXML private TextField txtACampoID;
-    @FXML private TextField txtACampoFecha1;
-    @FXML private TextField txtACampoFecha2;
-    @FXML private Label lbCampoVacio;
-    @FXML private Label lbCampoVacio2;
-    @FXML private Label lbCampoVacio3;
-    @FXML private Button btmRegresar;
+    @FXML private TextField txtADia1;
+    @FXML private TextField txtAMes1;
+    @FXML private TextField txtAYear1;
+    @FXML private TextField txtADia2;
+    @FXML private TextField txtAMes2;
+    @FXML private TextField txtAYear2;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
 
+
+
     }
 
-    @FXML public void GuardarData() throws SQLException {
+    @FXML public void GuardarData()
+    {
 
-        if(!(txtACampoID.getText().isBlank() && txtACampoFecha1.getText().isBlank()&&txtACampoFecha2.getText().isBlank()))
-        {
+    int id = Integer.parseInt(txtACampoID.getText());
+    String fecha1 = txtAYear1.getText() + "-" + txtAMes1.getText() + "-" + txtADia1.getText();
+    String fecha2 = txtAYear2.getText() + "-" + txtAMes2.getText() + "-" + txtADia2.getText();
 
-            DatabaseController dtb = new DatabaseController();
+    //Para la funcion
 
-            int value = Integer.parseInt(txtACampoID.getText());
-            Date fecha = Date.valueOf(txtACampoFecha1.getText());
-            Date fecha2 = Date.valueOf(txtACampoFecha2.getText());
-
-            System.out.println("Funciona");
-
-            //dtb.getComprasPorCliente(value,fecha,fecha2);
-
-        }
-        else
-        {
-            lbCampoVacio.setVisible(true);
-            lbCampoVacio2.setVisible(true);
-            lbCampoVacio3.setVisible(true);
-        }
     }
 
     @FXML public void BorrarDatos()
     {
+
         txtACampoID.setText("");
-        txtACampoFecha1.setText("");
-        txtACampoFecha2.setText("");
+        txtADia1.setText("");
+        txtAMes1.setText("");
+        txtAYear1.setText("");
+        txtADia2.setText("");
+        txtAMes2.setText("");
+        txtAYear2.setText("");
+
     }
 
 
