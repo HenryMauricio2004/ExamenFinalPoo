@@ -2,6 +2,8 @@ package org.example.examenpoo;
 
 import javafx.fxml.Initializable;
 import org.example.examenpoo.DataBase.DatabaseController;
+import org.example.examenpoo.DataBase.Errores_pruebas.CampoDePruebas;
+import org.example.examenpoo.DataBase.Errores_pruebas.Errors;
 import org.example.examenpoo.DataBase.GeneradorDataBase;
 import java.net.URL;
 import java.util.ArrayList;
@@ -13,25 +15,23 @@ public class HelloController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        GeneradorDataBase generadorDB = GeneradorDataBase.getInstance();
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Ingrese usuario mySQL:");
-        String user = scanner.nextLine();
+        CampoDePruebas CMP = new CampoDePruebas();
 
-        System.out.println("Ingrese password mySQL:");
-        String password = scanner.nextLine();
+        boolean flag = false;
 
-        generadorDB.setUser(user);
-        generadorDB.setPassword(password);
-        DatabaseController controller = new DatabaseController();
+        while (!flag)
+        {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Ingrese usuario mySQL:");
+            String user = scanner.nextLine();
 
-        generadorDB.createDataBase();
-        generadorDB.setDefaultRegistrations();
+            System.out.println("Ingrese password mySQL:");
+            String password = scanner.nextLine();
 
-        controller.obtenerTarjetasPorCliente(1);
+            flag = CMP.accesoSQL(user,password);
+        }
     }
-
 
     private void imprimirTreeMap(TreeMap<Integer, ArrayList<String>> treeMap){
 
