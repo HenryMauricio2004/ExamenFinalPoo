@@ -33,7 +33,7 @@ public class ComprasController implements Initializable
         if(!(txtACampoID.getText().isBlank() && txtACampoFecha1.getText().isBlank()&&txtACampoFecha2.getText().isBlank()))
         {
 
-            DatabaseController dtb = new DatabaseController();
+            DatabaseController dtb = DatabaseController.getInstance();
 
             int value = Integer.parseInt(txtACampoID.getText());
             Date fecha = Date.valueOf(txtACampoFecha1.getText());
