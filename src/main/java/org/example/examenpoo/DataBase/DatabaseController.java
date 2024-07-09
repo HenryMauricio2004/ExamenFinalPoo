@@ -16,9 +16,8 @@ public class DatabaseController {
         password = GeneradorDataBase.getInstance().getPassword(); //00183223 obtener contraseña almacenada en GeneradorDataBase
     }
 
-
     public TreeMap<Integer, ArrayList<String>> getComprasPorCliente(int id_cliente, Date fechaInicio, Date fechaFinal) throws SQLException { //00183223 funcion para obtener los registros de compra de un cliente en un lapso de tiempo en la DB
-
+      
         TreeMap<Integer, ArrayList<String>> resultadosBusqueda = new TreeMap<Integer, ArrayList<String>>(); //00183223 TreeMap donde se almacenaran los resultados de busqueda (key -> id_compra)
 
         Connection connection = null;

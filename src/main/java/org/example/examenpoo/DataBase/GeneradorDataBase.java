@@ -2,6 +2,8 @@ package org.example.examenpoo.DataBase;
 
 import java.sql.*;
 
+import static java.lang.System.exit;
+
 public class GeneradorDataBase { //00183223 Clase para crear la base de datos dentro de la computadora del usuario y guardar informacion para manipular la DB
 
     private String user = null; //00183223 para crear la base de datos se necesita la cuenta mySQL del usuario
@@ -19,20 +21,19 @@ public class GeneradorDataBase { //00183223 Clase para crear la base de datos de
         return instance; //00183223 devolver la instancia privada al usuario
     }
 
-
-
     public void createDataBase(){ //00183223 funcion para crear una nueva base de datos en localhost
 
-        if (user != null && password != null){ //00183223 verificar que los valores de usuario y contraseña de mySQL no son nulos para usar mySQL
+        if (!user.equals("nouser") && !password.equals("password")){ //00183223 verificar que los valores de usuario y contraseña de mySQL no son nulos para usar mySQL
             try{
+
+
                 Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306", user, password); //00183223 declarar conexion con la DB
+
                 PreparedStatement statement = connection.prepareStatement("CREATE DATABASE RegistrosBCN;"); //00183223 preparar instruccion para crear la base de datos
                 statement.executeUpdate(); //00183223 ejecutar la instruccion anterior;
 
                 statement = connection.prepareStatement("USE RegistrosBCN");//00183223 instruccion para cambiar a la base de datos creada
                 statement.executeQuery();//00183223 ejecutar cambio de base de datos en mySQL
-
-
 
                 statement = connection.prepareStatement( //00183223 ingresar una nueva instruccion para crear una tabla dentro de la DB
                         "CREATE TABLE Cliente(" + //00183223 crear la tabla Cliente
@@ -76,15 +77,15 @@ public class GeneradorDataBase { //00183223 Clase para crear la base de datos de
                 connection.close(); //00183223 cerrar conexion
 
             } catch (SQLException e){ //00183223 Atrapar error en el procedimiento SQL
+
                 deleteDataBase(); //00183223 eliminar base de datos si ya existe
                 createDataBase(); //00183223 crear otra vez la base de datos
+
             }
 
         } else{
-            System.out.println("fallo, es necesario definir el usuario y contraseña para mySQL"); //00183223 informar error
+            System.out.println(""); //00183223 informar error
         }
-
-
     }
 
     private void deleteDataBase(){ //00183223 funcion para borrar la base de datos
