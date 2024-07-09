@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="10.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.examenpoo.HelloController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="10.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.examenpoo.HelloController">
    <padding>
       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
    </padding>
@@ -16,7 +16,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="42.0" prefWidth="579.0" spacing="20.0">
                <children>
-                  <Button fx:id="btn_ComprasLapso" mnemonicParsing="false" prefWidth="200.0" text="Compras en lapso de tiempo" />
+                  <Button fx:id="btn_ComprasLapso" mnemonicParsing="false" onAction="#comprasTiempo" prefWidth="200.0" text="Compras en lapso de tiempo" />
                   <Button fx:id="btn_DineroGastado" mnemonicParsing="false" prefWidth="200.0" text="Dinero total gastado por mes" />
                </children>
             </HBox>
