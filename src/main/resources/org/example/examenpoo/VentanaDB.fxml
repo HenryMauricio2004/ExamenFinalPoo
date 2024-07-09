@@ -8,8 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.examenpoo.StartBD.DataBDController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.examenpoo.DataBDController">
    <children>
       <VBox alignment="CENTER" layoutY="-5.0" prefHeight="407.0" prefWidth="600.0" spacing="30.0">
          <children>
@@ -23,24 +22,28 @@
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="15.0">
                      <children>
                         <Label text="Usuario" />
-                        <TextField />
+                        <TextField fx:id="textAUsurio" />
                      </children>
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="15.0">
                      <children>
                         <Label text="Clave de acceso" />
-                        <TextField />
+                        <TextField fx:id="txtAClave" />
                      </children>
                   </VBox>
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
                <children>
-                  <Button mnemonicParsing="false" text="Borrar" />
-                  <Button mnemonicParsing="false" text="Acceder" />
+                  <Button mnemonicParsing="false" onAction="#limpiar" text="Borrar" />
+                  <Button fx:id="btmCargar" mnemonicParsing="false" onAction="#CargarDB" text="CargarDB" />
+                  <Button mnemonicParsing="false" onAction="#Acceder" text="Acceder" />
                </children>
             </HBox>
-            <Label />
+            <Label fx:id="lbMessError" text="Error, dato erroneo">
+               <font>
+                  <Font size="24.0" />
+               </font></Label>
          </children>
       </VBox>
    </children>

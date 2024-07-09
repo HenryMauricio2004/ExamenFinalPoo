@@ -13,8 +13,6 @@ public class Errors
 
         if(value1.isEmpty() && value2.isEmpty())
         {
-            System.out.println("fallo, es necesario definir el usuario y contraseña para mySQL");
-
             decision = 0; //Si hay nada devuelve el valor error 1
         }
 
