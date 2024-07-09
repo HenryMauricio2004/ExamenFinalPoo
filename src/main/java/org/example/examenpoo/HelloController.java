@@ -36,6 +36,15 @@ public class HelloController implements Initializable {
         generadorDB.createDataBase();
         generadorDB.setDefaultRegistrations();
 
+        TreeMap<Integer, ArrayList<String>> resultados = null;
+        try{
+            resultados = controller.getTarjetasAsociado(1);
+
+        } catch (SQLException e){
+            System.out.println(e);
+        }
+
+        imprimirTreeMap(resultados);
     }
 
 

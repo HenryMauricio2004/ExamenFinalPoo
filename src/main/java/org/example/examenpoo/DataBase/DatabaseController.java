@@ -55,10 +55,51 @@ public class DatabaseController {
             return resultadosBusqueda; //00183223 retornar el treeMap generado
         }
 
-
-
     }
 
+    public TreeMap<Integer, ArrayList<String>> getTarjetasAsociado(int id_asociado) throws SQLException {
+
+        TreeMap<Integer, ArrayList<String>> resultadosBusqueda = new TreeMap<Integer, ArrayList<String>>(); //00183223 TreeMap donde se almacenaran los resultados de busqueda (key -> id_compra)
+
+        Connection connection = null;
+
+        try{
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/registrosBCN", user, password);
+
+            PreparedStatement statement = connection.prepareStatement("select cliente.id_cliente as id_cliente, cliente.nombre as nombre, cliente.apellido as apellido, count(compra.id_compra) as cantCompras, sum(compra.montoTotal) as montoTotal " +
+                    "from compra inner join tarjeta on compra.id_tarjeta = tarjeta.id_tarjeta " +
+                    "inner join cliente on tarjeta.id_cliente = cliente.id_cliente " +
+                    "where tarjeta.id_asociado = ? " +
+                    "group by cliente.id_cliente;");
+
+            System.out.println(statement);
+            statement.setInt(1, id_asociado);
+
+            ResultSet resultados = statement.executeQuery();
+
+            while (resultados.next()){
+
+                ArrayList<String> detalles = new ArrayList<>();
+
+                detalles.add(resultados.getString("nombre"));
+                detalles.add(resultados.getString("apellido"));
+                detalles.add(resultados.getInt("cantCompras") + "");
+                detalles.add(resultados.getFloat("montoTotal") + "");
+
+                resultadosBusqueda.put(resultados.getInt("id_cliente"), detalles);
+            }
+
+        } catch (SQLException e){
+            System.out.println(e);
+        }finally{
+            if(!connection.isClosed()){
+                connection.close();
+            }
+
+            return resultadosBusqueda;
+        }
+
+    }
 
 
 }
