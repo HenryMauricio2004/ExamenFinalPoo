@@ -16,19 +16,22 @@
          <children>
             <HBox alignment="CENTER" prefHeight="42.0" prefWidth="579.0" spacing="20.0">
                <children>
-                  <Button fx:id="btn_ComprasLapso" mnemonicParsing="false" prefWidth="200.0" text="Compras en lapso de tiempo" />
+                  <Button fx:id="btn_ComprasLapso" mnemonicParsing="false" onAction="#accionBtn_ComprasLapso" prefWidth="200.0" text="Compras en lapso de tiempo" />
                   <Button fx:id="btn_DineroGastado" mnemonicParsing="false" prefWidth="200.0" text="Dinero total gastado por mes" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="42.0" prefWidth="579.0" spacing="20.0">
                <children>
-                  <Button fx:id="btn_TarjetasAsociadas" mnemonicParsing="false" prefWidth="200.0" text="Tarjetas asociadads de Cliente" />
-                  <Button fx:id="btn_ClientesAsociados" mnemonicParsing="false" prefWidth="200.0" text="Clientes con tarjeta de Asociado" />
+                  <Button fx:id="btn_TarjetasClientes" mnemonicParsing="false" prefWidth="200.0" text="Tarjetas de Cliente" />
+                  <Button fx:id="btn_ClientesAsociados" mnemonicParsing="false" onAction="#accionBtn_ClientesAsociados" prefWidth="200.0" text="Clientes con tarjeta de Asociado" />
                </children>
             </HBox>
          </children>
       </VBox>
       <Label fx:id="lbl_DescripcionBusqueda" alignment="BOTTOM_LEFT" maxWidth="1.7976931348623157E308" prefHeight="62.0" prefWidth="579.0" text="Descripcion de Busqueda:" />
-      <ScrollPane fx:id="sp_Resultados" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" />
+      <ScrollPane fx:id="sp_Resultados" fitToWidth="true" prefHeight="200.0" prefWidth="200.0">
+         <content>
+            <Label fx:id="lbl_textoResultados" />
+         </content></ScrollPane>
    </children>
 </VBox>
