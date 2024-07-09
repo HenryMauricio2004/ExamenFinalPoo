@@ -1,5 +1,6 @@
 package org.example.examenpoo;
 
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
 import java.net.URL;
@@ -10,10 +11,7 @@ import java.util.TreeMap;
 public class HelloController implements Initializable {
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle)
-    {
-
-    }
+    public void initialize(URL url, ResourceBundle resourceBundle){}
 
     private void imprimirTreeMap(TreeMap<Integer, ArrayList<String>> treeMap){
 

@@ -1,11 +1,10 @@
 package org.example.examenpoo.DataBase.Errores_pruebas;
 
-import org.example.examenpoo.DataBase.DatabaseController;
+import org.example.examenpoo.DatabaseController;
 import org.example.examenpoo.DataBase.GeneradorDataBase;
 
 public class CampoDePruebas
 {
-
 
     public boolean accesoSQL(String user,String pass)
     {
