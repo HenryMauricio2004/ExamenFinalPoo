@@ -14,28 +14,28 @@ import java.util.List;
 
 public class Facilitador {
 
-    private int id;
-    private String nombre;
+    private int id;//00030123  el identificador de la tarjeta del cliente
+    private String nombre;//00030123 el nombre del cliente
 
     public Facilitador(int id, String nombre){
-        this.id = id;
-        this.nombre = nombre;
+        this.id = id;//00030123 se le asigna el identificador a la tarjeta
+        this.nombre = nombre;//0003023 se le asigna el nombre a la tarjeta
     }
 
     public int getId() {
-        return id;
+        return id;//00030123 Obtienen el identificador de la tarjeta
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.id = id;//00030123 Asigna el identificador de la tarjeta
     }
 
     public String getNombre() {
-        return nombre;
+        return nombre;//00030123 Obtiene el nombre del clienete asociada a la tarjeta
     }
 
     public void setNombre(String nombre) {
-        this.nombre = nombre;
+        this.nombre = nombre;//0003123 Asigna el nombre del cliente asociadao a la tarjeta
     }
 
     public List<TarjetaCliente> getAllTarjetaCliente() throws SQLException{
