@@ -7,6 +7,9 @@ import javafx.stage.Stage;
 
 public class TarjetasClienteAplication extends Application
 {
+    public void invocarPantalla() throws Exception {
+        start(new Stage());
+    }
 
     @Override
     public void start(Stage stage) throws Exception

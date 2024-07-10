@@ -6,6 +6,11 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class DineroMesAplication extends Application {
+
+    public void invocarPantalla() throws Exception {
+        start(new Stage());
+    }
+
     @Override
     public void start(Stage stage) throws Exception
     {
