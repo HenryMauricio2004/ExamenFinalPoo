@@ -172,7 +172,7 @@ public class DatabaseController {
                 detalles.add(resultados.getString("nombre")); //00183223 agregar el nombre del cliente al array
                 detalles.add(resultados.getString("apellido")); //00183223 agregar el apellido del cliente al array
                 detalles.add(resultados.getInt("cantCompras") + ""); //00183223 agregar el nombre del cliente al array
-                detalles.add(resultados.getFloat("montoTotal") + ""); //00183223 agregar el nombre del cliente al array
+                detalles.add("$" + resultados.getFloat("montoTotal")); //00183223 agregar el nombre del cliente al array
 
                 resultadosBusqueda.put(resultados.getInt("id_cliente"), detalles); //00183223 agregar al diccionario el array de detalles y usar el id del cliente como key
             }

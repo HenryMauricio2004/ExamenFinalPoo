@@ -22,7 +22,7 @@ public class TarjetasFacilitadorAplication extends Application
     @Override
     public void start(Stage stage) throws Exception
     {
-        FXMLLoader fxmlLoader = new FXMLLoader(TarjetasFacilitadorAplication.class.getResource("TarjetasAsociadasPorID.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(TarjetasFacilitadorAplication.class.getResource("ClienteAsociadoFacilitador.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 400);
         stage.setResizable(false);
         stage.setTitle("DB");
