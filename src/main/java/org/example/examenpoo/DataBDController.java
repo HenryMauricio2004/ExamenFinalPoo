@@ -63,7 +63,7 @@ public class DataBDController implements Initializable
             Stage stage = new Stage(); //00133723 Para que se cree la visualizacion de nuestra ventana
 
             stage.setResizable(false); //00133723 para algo
-            stage.setTitle("Busquedas DB"); //00133723 Nombre del titulo personalizado para la ventana
+            stage.setTitle("Buscador personalizado"); //00133723 Nombre del titulo personalizado para la ventana
             stage.setScene(scene); //00133723 Para que pueda saber que ventana va mostrar
             stage.show(); //00133723 Nos muestra ya la ventana
 
