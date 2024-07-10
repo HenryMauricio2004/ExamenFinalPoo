@@ -22,8 +22,6 @@ public class Facilitador {
         this.nombre = nombre;
     }
 
-
-
     public int getId() {
         return id;
     }
@@ -38,5 +36,30 @@ public class Facilitador {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public List<TarjetaCliente> getAllTarjetaCliente() throws SQLException{
+        List<TarjetaCliente> asociados = new ArrayList<>();
+
+        try {
+            Connection connection = (Connection) DatabaseController.getInstance().getFacilitadores();
+            Statement statement = connection.createStatement();
+
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM Tarjetas");
+
+            while (resultSet.next()){
+                int idTarjeta = resultSet.getInt("Tarjeta ID");
+                String tipoTarjeta = resultSet.getString("Tipo de Tarjeta");
+                String numTarjeta = resultSet.getString("Numero de la Tarjeta");
+                Date fechaExpiracion = resultSet.getDate("Fecha de expiracion");
+                String facilitador = resultSet.getString("Facilitador de tarjeta");
+
+                TarjetaCliente tarjetaCliente = new TarjetaCliente(idTarjeta , tipoTarjeta , numTarjeta , fechaExpiracion , facilitador);
+                asociados.add(tarjetaCliente);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return asociados;
     }
 }
