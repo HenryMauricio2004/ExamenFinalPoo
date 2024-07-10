@@ -191,32 +191,32 @@ public class DatabaseController {
     }
 
 
-    public ArrayList<Facilitador> getFacilitadores() throws SQLException {
+    public ArrayList<Facilitador> getFacilitadores() throws SQLException { //00183223 funcion para obtener todos los Asociados de la base de datos
 
-        Connection connection = null;
-        ArrayList<Facilitador> facilitadores = new ArrayList<>();
+        Connection connection = null; //00183223 declarar conexion
+        ArrayList<Facilitador> facilitadores = new ArrayList<>(); //00183223 lista para guardar los resultados a devolver
 
         try{
 
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/registrosBCN", user, password);
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/registrosBCN", user, password); //00183223 inicializar conexion a DB
 
-            PreparedStatement instruccion = connection.prepareStatement("SELECT id_asociado, nombre FROM Asociado;");
+            PreparedStatement instruccion = connection.prepareStatement("SELECT id_asociado, nombre FROM Asociado;"); //00183223 seleccionar id y nombre de Asociado
 
-            ResultSet resultados = instruccion.executeQuery();
+            ResultSet resultados = instruccion.executeQuery(); //00183223 obtener resultados de la solicitud
 
-            while (resultados.next()){
-                Facilitador nuevoFacilitador = new Facilitador(resultados.getInt("id_asociado"), resultados.getString("nombre"));
-                facilitadores.add(nuevoFacilitador);
+            while (resultados.next()){ //00183223 checar cada instancia de los resultados
+                Facilitador nuevoFacilitador = new Facilitador(resultados.getInt("id_asociado"), resultados.getString("nombre")); //00183223 crear un nuevo Facilitador con los datos obtenidos de cada instancia
+                facilitadores.add(nuevoFacilitador); //00183223 agregar el Facilitador a la lista de resultados a devolver
             }
 
-        }catch (SQLException e){
-            System.out.println(e);
+        }catch (SQLException e){ //00183223 atrapar error SQL
+            System.out.println(e); //00183223 informar error en consola
         } finally{
-            if (!connection.isClosed()){
-                connection.close();
+            if (!connection.isClosed()){ //00183223 verificar si la conexion esta abierta
+                connection.close(); //00183223 si la conexion esta abierta, se cierra
             }
 
-            return facilitadores;
+            return facilitadores; //00183223 devolver lista de resultados obtenidos
         }
 
     }
