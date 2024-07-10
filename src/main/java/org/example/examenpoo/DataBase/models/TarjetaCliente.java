@@ -13,7 +13,7 @@ public class TarjetaCliente { //00082023 Definición de la clase TarjetaCliente
         this.tipoTarjeta = tipoTarjeta; //00082023 Asigna el tipo de tarjetaq
         this.numTarjeta = numTarjeta; //00082023 Asigna el número de la tarjeta
         this.fechaExpiracion = fechaExpiracion; //00082023 Asigna la fecha de expiración
-        this.facilitador = facilitador;
+        this.facilitador = facilitador;//00030123 Asigna el facilitador de la tarjeta
     } //00082023 Fin del constructor
 
     public int getIdTarjeta() { return idTarjeta; } //00082023 Obtiene el identificador de la tarjeta
