@@ -1,2 +1,0 @@
-2, Jonathan, Escobar, 10.99, 2024-01-11
-3, Jonathan, Escobar, 9.0, 2024-01-12

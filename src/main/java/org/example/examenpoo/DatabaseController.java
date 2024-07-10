@@ -57,7 +57,7 @@ public class DatabaseController {
 
                 detalles.add(resultados.getString("nombre")); //00183223 agregar el nombre del cliente al array
                 detalles.add(resultados.getString("apellido")); //00183223 agregar el apellido del cliente al array
-                detalles.add(resultados.getFloat("monto") + ""); //00183223 agregar el dinero gastado en la compra al array
+                detalles.add("$" + resultados.getFloat("monto")); //00183223 agregar el dinero gastado en la compra al array
                 detalles.add(resultados.getDate("fecha").toString()); //00183223 transformar la fecha a String y agregarlo al array
 
                 resultadosBusqueda.put(resultados.getInt("id"), detalles); //00183223 agregar al diccionario el array de detalles y usar el id de la compra como key
@@ -78,7 +78,7 @@ public class DatabaseController {
 
     }
 
-    public TreeMap<Integer, ArrayList<String>> obtenerGastoPorMes(int idCliente, int year, int month) { //00082023 Método para obtener el gasto por año y mes del cliente
+    public TreeMap<Integer, ArrayList<String>> getGastoPorMes(int idCliente, int year, int month) { //00082023 Método para obtener el gasto por año y mes del cliente
         TreeMap<Integer, ArrayList<String>> resultadosBusqueda = new TreeMap<>(); //00082023 Inicialización del TreeMap que contendrá los resultados de la búsqueda
         try { //00082023 Prepara la consulta SQL
             Connection connection = DriverManager.getConnection(connectionString, user, password); //00082023 Conexión a la base de datos
@@ -98,8 +98,8 @@ public class DatabaseController {
             while (resultados.next()) { //00082023 Iteración sobre los resultados
                 double dineroGastado = resultados.getDouble("dineroGastado"); //00082023 Obtener el monto total gastado
                 ArrayList<String> arrayList = new ArrayList<>(); //00082023 arrayList que almacena el resultado
-                arrayList.add(dineroGastado + ""); //00082023 agregar el dinero total en el arreglo
-
+                arrayList.add(month + "-" + year); //00082023 agregar la fecha en el arreglo
+                arrayList.add( "$"+ dineroGastado); //00082023 agregar el dinero total en el arreglo
                 resultadosBusqueda.put(1, arrayList); //00082023 Añadir el monto total gastado al TreeMap
             }
 
@@ -119,7 +119,7 @@ public class DatabaseController {
             PreparedStatement statement = connection.prepareStatement( //00082023 Preparación de la consulta SQL
                     "SELECT id_Tarjeta, tipoTarjeta, numTarjeta, fechaExpiracion " + //00082023 Selección de columnas
                             "FROM tarjeta " + //00082023 Tabla de la que se seleccionan los dato
-                            "WHERE id_Cliente = ?" //00082023 Condición para el cliente específico
+                            "WHERE id_Cliente = ? ORDER BY tipoTarjeta DESC;" //00082023 Condición para el cliente específico
             ); //00082023 Fin de la preparación de la consulta
 
             statement.setInt(1, idCliente); //00082023 Establecer el id del cliente en la consulta

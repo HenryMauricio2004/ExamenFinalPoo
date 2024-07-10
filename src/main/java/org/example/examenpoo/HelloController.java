@@ -9,6 +9,7 @@ import org.example.examenpoo.DataBase.GeneradorDataBase;
 
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.example.examenpoo.mediator.Mediator;
 
 
 import java.io.IOException;
@@ -22,17 +23,24 @@ public class HelloController implements Initializable {
 
     private DatabaseController controller;
     private GeneradorDataBase generador;
+    private Mediator mediator;
 
     @FXML private Label lbl_textoResultados;
+    @FXML private Label lbl_DescripcionBusqueda;
 
     @Override
 
     public void initialize(URL url, ResourceBundle resourceBundle){
         controller = DatabaseController.getInstance();
         generador = GeneradorDataBase.getInstance();
+        mediator = Mediator.getInstance();
 
         controller.setUser(generador.getUser());
         controller.setPassword(generador.getPassword());
+
+        mediator.setLabelResultados(lbl_textoResultados);
+        mediator.setLabelDetallesBusqueda(lbl_DescripcionBusqueda);
+
     }
 
     @FXML void accionBtn_ComprasLapso(){
@@ -61,18 +69,10 @@ public class HelloController implements Initializable {
     }
 
 
-    @FXML public void comprasTiempo() throws IOException {
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("ComprasRealizadas.fxml")); //00133723 creamos un loader para cargar la ventana
-        Scene scene = new Scene(loader.load(),700,400); //00133723 Dimensiones para la ventana
-        Stage stage = new Stage(); //00133723 Para que se cree la visualizacion de nuestra ventana
-
-        stage.setResizable(false); //00133723 para algo
-        stage.setTitle("Busquedas DB"); //00133723 Nombre del titulo personalizado para la ventana
-        stage.setScene(scene); //00133723 Para que pueda saber que ventana va mostrar
-        stage.show(); //00133723 Nos muestra ya la ventana
-
+    @FXML public void comprasTiempo() throws Exception {
+        ComprasAplication.getInstance().invocarPantalla();
     }
+
     @FXML public void tarjetasAsociados() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("TarjetasAsociadasPorID.fxml")); //00133723 creamos un loader para cargar la ventana
         Scene scene = new Scene(loader.load(),700,400); //00133723 Dimensiones para la ventana
