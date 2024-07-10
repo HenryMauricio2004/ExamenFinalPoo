@@ -21,12 +21,12 @@ public class DatabaseController {
         password = GeneradorDataBase.getInstance().getPassword(); //00183223 obtener contraseña almacenada en GeneradorDataBase
     }
 
-    public static DatabaseController getInstance(){
+    public static DatabaseController getInstance(){ //00183223 funcion para obtener instancia singleton
 
-        if (instance == null){
-            instance = new DatabaseController();
+        if (instance == null){ //00183223 comprobar si la instancia es nula
+            instance = new DatabaseController(); //00183223 de ser nula se le asigna un nuevo valor
         }
-        return instance;
+        return instance; //00183223 retornar la instancia singleton
     }
 
 
@@ -199,19 +199,19 @@ public class DatabaseController {
     }
 
 
-    public String getUser() {
+    public String getUser() { //00183223 funcion para obtener usuario SQL
         return user;
     }
 
-    public void setUser(String user) {
+    public void setUser(String user) { //00183223 funcion para setear valor de usuario SQL
         this.user = user;
     }
 
-    public String getPassword() {
+    public String getPassword() { //00183223 funcion para obtener Password de SQL
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(String password) { //00183223 funcion para setear Password de SQL
         this.password = password;
     }
 }

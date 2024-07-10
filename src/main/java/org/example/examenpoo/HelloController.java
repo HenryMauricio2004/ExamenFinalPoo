@@ -31,41 +31,16 @@ public class HelloController implements Initializable {
     @Override
 
     public void initialize(URL url, ResourceBundle resourceBundle){
-        controller = DatabaseController.getInstance();
-        generador = GeneradorDataBase.getInstance();
-        mediator = Mediator.getInstance();
+        controller = DatabaseController.getInstance(); //00183223 asignar referencia a singleton de controller
+        generador = GeneradorDataBase.getInstance(); //00183223 asignar referencia a singleton de generadotDataBase
+        mediator = Mediator.getInstance(); //00183223 asignar referencia a singleton de mediator
 
-        controller.setUser(generador.getUser());
-        controller.setPassword(generador.getPassword());
+        controller.setUser(generador.getUser()); //00183223 pasar el usuario guardado en generador a controller
+        controller.setPassword(generador.getPassword()); //00183223 pasar el password guarddado en generador a controller
 
-        mediator.setLabelResultados(lbl_textoResultados);
-        mediator.setLabelDetallesBusqueda(lbl_DescripcionBusqueda);
+        mediator.setLabelResultados(lbl_textoResultados); //00183223 pasar referencia de labelResultados a mediator
+        mediator.setLabelDetallesBusqueda(lbl_DescripcionBusqueda); //00183223 pasar referencia de labelDetallesBusqueda a mediator
 
-    }
-
-    @FXML void accionBtn_ComprasLapso(){
-        try{
-
-            TreeMap <Integer, ArrayList<String>> resultados;
-            resultados = controller.getComprasPorCliente(1, Date.valueOf("2023-12-31"), Date.valueOf("2024-01-21"));
-
-            imprimirTreeMap(resultados);
-        } catch (Exception e){
-            System.out.println(e);
-        }
-
-    }
-
-    @FXML void accionBtn_ClientesAsociados(){
-        try{
-
-            TreeMap <Integer, ArrayList<String>> resultados;
-            resultados = controller.getTarjetasAsociado(2);
-
-            imprimirTreeMap(resultados);
-        } catch (Exception e){
-            System.out.println(e);
-        }
     }
 
 
@@ -105,23 +80,6 @@ public class HelloController implements Initializable {
         stage.setScene(scene); //00133723 Para que pueda saber que ventana va mostrar
         stage.show(); //00133723 Nos muestra ya la ventana
     }
-
-
-
-    private void imprimirTreeMap(TreeMap<Integer, ArrayList<String>> treeMap){
-
-        lbl_textoResultados.setText("");
-
-        for (int id: treeMap.keySet()){
-            lbl_textoResultados.setText(lbl_textoResultados.getText() + id);
-
-            for (String elemento: treeMap.get(id)){
-                lbl_textoResultados.setText(lbl_textoResultados.getText() + ", " + elemento);
-            }
-
-            lbl_textoResultados.setText(lbl_textoResultados.getText() + "\n");
-        }
-
-    }
+    
 
 }
