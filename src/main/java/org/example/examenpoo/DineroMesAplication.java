@@ -7,6 +7,12 @@ import javafx.stage.Stage;
 
 public class DineroMesAplication extends Application {
 
+    private static DineroMesAplication instance = new DineroMesAplication();
+
+    private DineroMesAplication() {}
+
+    public static DineroMesAplication getInstance() {return instance;}
+
     public void invocarPantalla() throws Exception {
         start(new Stage());
     }

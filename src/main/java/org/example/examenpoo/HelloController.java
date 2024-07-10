@@ -49,29 +49,19 @@ public class HelloController implements Initializable {
         ComprasAplication.getInstance().invocarPantalla();
     }
 
-    @FXML public void comprasTiempo() throws Exception {
-
-        Ventanas ctm = new Ventanas("ComprasRealizadas","DBExplorer");
-        Stage stage = new Stage();
-        ctm.start(stage);
-    }
-    @FXML public void tarjetasAsociados() throws Exception {
-
-        Ventanas ctm = new Ventanas("TarjetasAsociadasPorID","Tarjetas Asociadas");
-        Stage stage = new Stage();
-        ctm.start(stage);
+    @FXML public void tarjetasAsociados() throws Exception
+    {
+        TarjetasClienteAplication.getInstance().invocarPantalla();
     }
 
-    @FXML public void dineroPorMes () throws Exception {
-        Ventanas ctm = new Ventanas("DineroGastadoPorMes","Explorer");
-        Stage stage = new Stage();
-        ctm.start(stage);
+    @FXML public void dineroPorMes () throws Exception
+    {
+        DineroMesAplication.getInstance().invocarPantalla();
     }
 
-    @FXML public void ClienteAsociadoFacilitador() throws Exception {
-        Ventanas ctm = new Ventanas("ClienteAsociadoFacilitador","BD");
-        Stage stage = new Stage();
-        ctm.start(stage);
+    @FXML public void ClienteAsociadoFacilitador() throws Exception
+    {
+        TarjetasFacilitadorAplication.getInstance().invocarPantalla();
     }
     
 

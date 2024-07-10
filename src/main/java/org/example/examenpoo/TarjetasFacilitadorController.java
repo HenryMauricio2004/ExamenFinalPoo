@@ -24,9 +24,6 @@ public class TarjetasFacilitadorController implements Initializable {
 
     @FXML public void cargarInfo()
     {
-        try {
-
-        }
-        System.out.println(cmbFacilitadores.getSelectionModel().getSelectedItem());
+        
     }
 }
