@@ -1,6 +1,7 @@
 package org.example.examenpoo;
 
 import org.example.examenpoo.DataBase.GeneradorDataBase;
+import org.example.examenpoo.DataBase.models.Facilitador;
 import org.example.examenpoo.DataBase.models.TarjetaCliente;
 
 import java.sql.*;
@@ -21,12 +22,12 @@ public class DatabaseController {
         password = GeneradorDataBase.getInstance().getPassword(); //00183223 obtener contraseña almacenada en GeneradorDataBase
     }
 
-    public static DatabaseController getInstance(){
+    public static DatabaseController getInstance(){ //00183223 funcion para obtener instancia singleton
 
-        if (instance == null){
-            instance = new DatabaseController();
+        if (instance == null){ //00183223 comprobar si la instancia es nula
+            instance = new DatabaseController(); //00183223 de ser nula se le asigna un nuevo valor
         }
-        return instance;
+        return instance; //00183223 retornar la instancia singleton
     }
 
 
@@ -57,7 +58,7 @@ public class DatabaseController {
 
                 detalles.add(resultados.getString("nombre")); //00183223 agregar el nombre del cliente al array
                 detalles.add(resultados.getString("apellido")); //00183223 agregar el apellido del cliente al array
-                detalles.add(resultados.getFloat("monto") + ""); //00183223 agregar el dinero gastado en la compra al array
+                detalles.add("$" + resultados.getFloat("monto")); //00183223 agregar el dinero gastado en la compra al array
                 detalles.add(resultados.getDate("fecha").toString()); //00183223 transformar la fecha a String y agregarlo al array
 
                 resultadosBusqueda.put(resultados.getInt("id"), detalles); //00183223 agregar al diccionario el array de detalles y usar el id de la compra como key
@@ -78,7 +79,7 @@ public class DatabaseController {
 
     }
 
-    public TreeMap<Integer, ArrayList<String>> obtenerGastoPorMes(int idCliente, int year, int month) { //00082023 Método para obtener el gasto por año y mes del cliente
+    public TreeMap<Integer, ArrayList<String>> getGastoPorMes(int idCliente, int year, int month) { //00082023 Método para obtener el gasto por año y mes del cliente
         TreeMap<Integer, ArrayList<String>> resultadosBusqueda = new TreeMap<>(); //00082023 Inicialización del TreeMap que contendrá los resultados de la búsqueda
         try { //00082023 Prepara la consulta SQL
             Connection connection = DriverManager.getConnection(connectionString, user, password); //00082023 Conexión a la base de datos
@@ -98,8 +99,8 @@ public class DatabaseController {
             while (resultados.next()) { //00082023 Iteración sobre los resultados
                 double dineroGastado = resultados.getDouble("dineroGastado"); //00082023 Obtener el monto total gastado
                 ArrayList<String> arrayList = new ArrayList<>(); //00082023 arrayList que almacena el resultado
-                arrayList.add(dineroGastado + ""); //00082023 agregar el dinero total en el arreglo
-
+                arrayList.add(month + "-" + year); //00082023 agregar la fecha en el arreglo
+                arrayList.add( "$"+ dineroGastado); //00082023 agregar el dinero total en el arreglo
                 resultadosBusqueda.put(1, arrayList); //00082023 Añadir el monto total gastado al TreeMap
             }
 
@@ -119,7 +120,7 @@ public class DatabaseController {
             PreparedStatement statement = connection.prepareStatement( //00082023 Preparación de la consulta SQL
                     "SELECT id_Tarjeta, tipoTarjeta, numTarjeta, fechaExpiracion " + //00082023 Selección de columnas
                             "FROM tarjeta " + //00082023 Tabla de la que se seleccionan los dato
-                            "WHERE id_Cliente = ?" //00082023 Condición para el cliente específico
+                            "WHERE id_Cliente = ? ORDER BY tipoTarjeta DESC;" //00082023 Condición para el cliente específico
             ); //00082023 Fin de la preparación de la consulta
 
             statement.setInt(1, idCliente); //00082023 Establecer el id del cliente en la consulta
@@ -190,6 +191,37 @@ public class DatabaseController {
     }
 
 
+    public ArrayList<Facilitador> getFacilitadores() throws SQLException { //00183223 funcion para obtener todos los Asociados de la base de datos
+
+        Connection connection = null; //00183223 declarar conexion
+        ArrayList<Facilitador> facilitadores = new ArrayList<>(); //00183223 lista para guardar los resultados a devolver
+
+        try{
+
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/registrosBCN", user, password); //00183223 inicializar conexion a DB
+
+            PreparedStatement instruccion = connection.prepareStatement("SELECT id_asociado, nombre FROM Asociado;"); //00183223 seleccionar id y nombre de Asociado
+
+            ResultSet resultados = instruccion.executeQuery(); //00183223 obtener resultados de la solicitud
+
+            while (resultados.next()){ //00183223 checar cada instancia de los resultados
+                Facilitador nuevoFacilitador = new Facilitador(resultados.getInt("id_asociado"), resultados.getString("nombre")); //00183223 crear un nuevo Facilitador con los datos obtenidos de cada instancia
+                facilitadores.add(nuevoFacilitador); //00183223 agregar el Facilitador a la lista de resultados a devolver
+            }
+
+        }catch (SQLException e){ //00183223 atrapar error SQL
+            System.out.println(e); //00183223 informar error en consola
+        } finally{
+            if (!connection.isClosed()){ //00183223 verificar si la conexion esta abierta
+                connection.close(); //00183223 si la conexion esta abierta, se cierra
+            }
+
+            return facilitadores; //00183223 devolver lista de resultados obtenidos
+        }
+
+    }
+
+
 
     private String censurarNumTarjeta(String numeroTarjeta) { //00082023 Método para censurar el número de la tarjeta
         int length = numeroTarjeta.length(); //00082023 Obtener la longitud del número de tarjeta
@@ -199,19 +231,22 @@ public class DatabaseController {
     }
 
 
-    public String getUser() {
+
+
+
+    public String getUser() { //00183223 funcion para obtener usuario SQL
         return user;
     }
 
-    public void setUser(String user) {
+    public void setUser(String user) { //00183223 funcion para setear valor de usuario SQL
         this.user = user;
     }
 
-    public String getPassword() {
+    public String getPassword() { //00183223 funcion para obtener Password de SQL
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(String password) { //00183223 funcion para setear Password de SQL
         this.password = password;
     }
 }
