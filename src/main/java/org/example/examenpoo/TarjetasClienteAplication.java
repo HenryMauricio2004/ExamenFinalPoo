@@ -8,13 +8,13 @@ import javafx.stage.Stage;
 public class TarjetasClienteAplication extends Application
 {
 
-    private static TarjetasClienteAplication instance = new TarjetasClienteAplication();
+    private static TarjetasClienteAplication instance = new TarjetasClienteAplication(); //00133723 Crea el objeto desde el momento que lo invocamos
 
     private TarjetasClienteAplication(){}
 
     public static TarjetasClienteAplication getInstance(){
         return instance;
-    }
+    } //00133723 Nos retorna la instancia
 
     public void invocarPantalla() throws Exception {
         start(new Stage());

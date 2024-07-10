@@ -28,10 +28,7 @@ public class ComprasController implements Initializable
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
-    {
-            DatabaseController dtb = DatabaseController.getInstance();
-    }
-
+    {}
 
     @FXML public void GuardarData()
     {
@@ -48,21 +45,19 @@ public class ComprasController implements Initializable
 
             Mediator.getInstance().procesarResultados(Enum_reportes.REPORTE_A, resultados, detalles); //00183223 procesar resultados, imprimir resultados, crear archivo txt e imprimir detalles
 
-        } catch (Exception e){
-
-        }
+        } catch (Exception e){}
     }
 
     @FXML public void BorrarDatos()
     {
 
-        txtACampoID.setText("");
-        txtADia1.setText("");
-        txtAMes1.setText("");
-        txtAYear1.setText("");
-        txtADia2.setText("");
-        txtAMes2.setText("");
-        txtAYear2.setText("");
+        txtACampoID.setText(""); //00133723 hace que el valor del Textfield sea ""
+        txtADia1.setText("");//00133723 hace que el valor del Textfield sea ""
+        txtAMes1.setText("");//00133723 hace que el valor del Textfield sea ""
+        txtAYear1.setText("");//00133723 hace que el valor del Textfield sea ""
+        txtADia2.setText("");//00133723 hace que el valor del Textfield sea ""
+        txtAMes2.setText("");//00133723 hace que el valor del Textfield sea ""
+        txtAYear2.setText("");//00133723 hace que el valor del Textfield sea ""
 
     }
 

@@ -37,17 +37,18 @@ public class DineroMesController implements Initializable {
 
             Mediator.getInstance().procesarResultados(Enum_reportes.REPORTE_B, resultados, detalles); //00183223 procesar datos (imprimir resultados, hacer reporte.txt e imprimir detalles)
 
-        } catch (Exception e){
-
+        } catch (Exception e)
+        {
+            System.out.println(e.getMessage()); //00133723 Nos devuelve el error durante la ejecucion
         }
 
     }
 
     @FXML public void borrar()
     {
-        txtACampoID.setText("");
-        txtACampoMes.setText("");
-        txtACampoAnual.setText("");
+        txtACampoID.setText(""); //00133723 Cambia el valor de los campos a ""
+        txtACampoMes.setText(""); //00133723 Cambia el valor de los campos a ""
+        txtACampoAnual.setText(""); //00133723 Cambia el valor de los campos a ""
     }
 
 
