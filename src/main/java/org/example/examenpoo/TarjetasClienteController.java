@@ -2,6 +2,7 @@ package org.example.examenpoo;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import org.example.examenpoo.DataBase.Enum_reportes;
 import org.example.examenpoo.mediator.Mediator;
@@ -16,12 +17,13 @@ public class TarjetasClienteController implements Initializable
 {
 
     @FXML private TextField txtACampoID;
+    @FXML private Label lbCampo0;
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-
+        lbCampo0.setVisible(false); //00133723 mensaje oculto
     }
 
     @FXML public void guardarInfo()
@@ -45,5 +47,5 @@ public class TarjetasClienteController implements Initializable
     @FXML public void borrarInfo()
     {
         txtACampoID.setText("");
-    }
+    } //00133723 Remplaza los valores a ""
 }

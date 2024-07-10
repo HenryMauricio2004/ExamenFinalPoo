@@ -2,6 +2,7 @@ package org.example.examenpoo;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import org.example.examenpoo.DataBase.Enum_reportes;
 import org.example.examenpoo.mediator.Mediator;
@@ -17,11 +18,16 @@ public class DineroMesController implements Initializable {
     @FXML private TextField txtACampoID;
     @FXML private TextField txtACampoMes;
     @FXML private TextField txtACampoAnual;
+    @FXML private Label lbCampo0;
+    @FXML private Label lbCampo1;
+    @FXML private Label lbCampo02;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-
+        lbCampo0.setVisible(false); //00133723 Para que el usuario no vea el mensaje
+        lbCampo1.setVisible(false);//00133723 Para que el usuario no vea el mensaje
+        lbCampo02.setVisible(false);//00133723 Para que el usuario no vea el mensaje
     }
 
     @FXML public void Guardar()
@@ -40,15 +46,13 @@ public class DineroMesController implements Initializable {
         } catch (Exception e){
 
         }
-
     }
 
     @FXML public void borrar()
     {
-        txtACampoID.setText("");
-        txtACampoMes.setText("");
-        txtACampoAnual.setText("");
+        txtACampoID.setText(""); //00133723 Remplaza los valores a ""
+        txtACampoMes.setText(""); //00133723 Remplaza los valores a ""
+        txtACampoAnual.setText(""); //00133723 Remplaza los valores a ""
     }
-
 
 }
