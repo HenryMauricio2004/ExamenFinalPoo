@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 
 import javafx.scene.control.Label;
+import org.example.examenpoo.Controladores.Ventanas;
 import org.example.examenpoo.DataBase.GeneradorDataBase;
 
 import javafx.scene.Scene;
@@ -61,19 +62,15 @@ public class HelloController implements Initializable {
     }
 
 
-    @FXML public void comprasTiempo() throws IOException {
+    @FXML public void comprasTiempo() throws Exception {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("ComprasRealizadas.fxml")); //00133723 creamos un loader para cargar la ventana
-        Scene scene = new Scene(loader.load(),700,400); //00133723 Dimensiones para la ventana
-        Stage stage = new Stage(); //00133723 Para que se cree la visualizacion de nuestra ventana
-
-        stage.setResizable(false); //00133723 para algo
-        stage.setTitle("Busquedas DB"); //00133723 Nombre del titulo personalizado para la ventana
-        stage.setScene(scene); //00133723 Para que pueda saber que ventana va mostrar
-        stage.show(); //00133723 Nos muestra ya la ventana
+        Ventanas ctm = new Ventanas("ComprasRealizadas","DBExplorer");
+        Stage stage = new Stage();
+        ctm.start(stage);
 
     }
     @FXML public void tarjetasAsociados() throws IOException {
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("TarjetasAsociadasPorID.fxml")); //00133723 creamos un loader para cargar la ventana
         Scene scene = new Scene(loader.load(),700,400); //00133723 Dimensiones para la ventana
         Stage stage = new Stage(); //00133723 Para que se cree la visualizacion de nuestra ventana
