@@ -46,22 +46,22 @@ public class HelloController implements Initializable {
 
 
     @FXML public void comprasTiempo() throws Exception {
-        ComprasAplication.getInstance().invocarPantalla();
+        ComprasAplication.getInstance().invocarPantalla(); //00133723 Permite visualizar la pantalla
     }
 
     @FXML public void tarjetasAsociados() throws Exception
     {
-        TarjetasClienteAplication.getInstance().invocarPantalla();
+        TarjetasClienteAplication.getInstance().invocarPantalla(); //00133723 Permite visualizar la pantalla
     }
 
     @FXML public void dineroPorMes () throws Exception
     {
-        DineroMesAplication.getInstance().invocarPantalla();
+        DineroMesAplication.getInstance().invocarPantalla(); //00133723 Permite visualizar la pantalla
     }
 
     @FXML public void ClienteAsociadoFacilitador() throws Exception
     {
-        TarjetasFacilitadorAplication.getInstance().invocarPantalla();
+        TarjetasFacilitadorAplication.getInstance().invocarPantalla(); //00133723 Permite visualizar la pantalla
     }
     
 

@@ -34,7 +34,7 @@
                      <children>
                         <Label text="Ingrese el mes" />
                         <TextField fx:id="txtACampoMes" />
-                        <Label text="Campo vacío" />
+                        <Label fx:id="lbCampo1" text="Campo vacío" />
                      </children>
                      <padding>
                         <Insets left="10.0" />
@@ -54,7 +54,7 @@
             </VBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
                <children>
-                  <Button fx:id="btmDatos0" mnemonicParsing="false" text="Borrar datos" />
+                  <Button fx:id="btmDatos0" mnemonicParsing="false" onAction="#borrar" text="Borrar datos" />
                   <Button fx:id="btmGuardar" mnemonicParsing="false" onAction="#Guardar" text="Guardar datos" />
                </children>
             </HBox>
