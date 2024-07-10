@@ -26,6 +26,7 @@ public class TarjetasFacilitadorController implements Initializable {
         cmbFacilitadores.getItems().addAll(list);
     }
 
+        
     @FXML public void cargarInfo() throws SQLException {
 
         int id = 0;
