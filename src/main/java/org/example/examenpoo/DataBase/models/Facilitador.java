@@ -14,25 +14,29 @@ import java.util.List;
 
 public class Facilitador {
 
-    public List<TarjetaCliente> getAllTarjetaCliente() throws SQLException{
-        List<TarjetaCliente> asociados = new ArrayList<>();
+    private int id;
+    private String nombre;
 
-        try(Connection connection = GeneradorDataBase.getInstance();
-            Statement statement = connection.createStatement();) {
+    public Facilitador(int id, String nombre){
+        this.id = id;
+        this.nombre = nombre;
+    }
 
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM Tarjetas");
 
-            while (resultSet.next()){
-                int idTarjeta = resultSet.getInt("Tarjeta ID");
-                String tipoTarjeta = resultSet.getString("Tipo de Tarjeta");
-                String numTarjeta = resultSet.getString("Numero de la Tarjeta");
-                Date fechaExpiracion = resultSet.getDate("Fecha de expiracion");
-                String facilitador = resultSet.getString("Facilitador de tarjeta");
 
-                TarjetaCliente tarjetaCliente = new TarjetaCliente(idTarjeta , tipoTarjeta , numTarjeta , fechaExpiracion , facilitador);
-                asociados.add(tarjetaCliente);
-            }
-        }
-        return asociados;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 }

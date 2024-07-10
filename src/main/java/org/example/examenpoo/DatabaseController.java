@@ -1,6 +1,7 @@
 package org.example.examenpoo;
 
 import org.example.examenpoo.DataBase.GeneradorDataBase;
+import org.example.examenpoo.DataBase.models.Facilitador;
 import org.example.examenpoo.DataBase.models.TarjetaCliente;
 
 import java.sql.*;
@@ -190,6 +191,37 @@ public class DatabaseController {
     }
 
 
+    public ArrayList<Facilitador> getFacilitadores() throws SQLException {
+
+        Connection connection = null;
+        ArrayList<Facilitador> facilitadores = new ArrayList<>();
+
+        try{
+
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/registrosBCN", user, password);
+
+            PreparedStatement instruccion = connection.prepareStatement("SELECT id_asociado, nombre FROM Asociado;");
+
+            ResultSet resultados = instruccion.executeQuery();
+
+            while (resultados.next()){
+                Facilitador nuevoFacilitador = new Facilitador(resultados.getInt("id_asociado"), resultados.getString("nombre"));
+                facilitadores.add(nuevoFacilitador);
+            }
+
+        }catch (SQLException e){
+            System.out.println(e);
+        } finally{
+            if (!connection.isClosed()){
+                connection.close();
+            }
+
+            return facilitadores;
+        }
+
+    }
+
+
 
     private String censurarNumTarjeta(String numeroTarjeta) { //00082023 Método para censurar el número de la tarjeta
         int length = numeroTarjeta.length(); //00082023 Obtener la longitud del número de tarjeta
@@ -197,6 +229,9 @@ public class DatabaseController {
         return "XXXX XXXX XXXX " + ultimosCuatro; //00082023 Retornar el número censurado mediante las "X"
 
     }
+
+
+
 
 
     public String getUser() { //00183223 funcion para obtener usuario SQL
