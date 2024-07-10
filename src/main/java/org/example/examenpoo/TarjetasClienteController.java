@@ -45,5 +45,5 @@ public class TarjetasClienteController implements Initializable
     @FXML public void borrarInfo()
     {
         txtACampoID.setText("");
-    }
+    } //00133723 Borra la informacion dentro de los bloques
 }
